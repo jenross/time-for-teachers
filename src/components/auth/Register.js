@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
-import './Register.css'
+import './forms.css'
 
 class Register extends Component {
   state = {
@@ -137,7 +137,7 @@ class Register extends Component {
                 </span>
               </p>
             </div>
-            <div className="field">
+            <div className="form-bottom">
               <p className="control">
                 <a className="forgot-link" href="/forgotpassword">Forgot password?</a>
               </p>
