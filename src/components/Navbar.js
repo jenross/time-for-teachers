@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Auth } from 'aws-amplify';
+import './Navbar.css';
 
 export default class Navbar extends Component {
   handleLogOut = async event => {
@@ -15,46 +16,40 @@ export default class Navbar extends Component {
   render() {
     return (
       <nav className="navbar" role="navigation">
-        <div className="navbar-brand">
-          <a className="navbar-link" href="/">
+        {/* <div className="logo">
+          <a className="navbar-link" href="/"> */}
             {/* <img src={} width="112" height="28" alt="Time for Teachers logo" /> */}
+          {/* </a>
+        </div> */}
+          <a href="/" className="navbar-start">
+            Home
           </a>
-        </div>
-
-        <div className="navbar-menu">
-          <div className="navbar-start">
-            <a href="/" className="navbar-link">
-              Home
-            </a>
-          </div>
-
-          <div className="navbar-end">
-            <div className="navbar-link">
-              {this.props.auth.isAuthenticated && this.props.auth.user && (
-                <p>
-                  Hello {this.props.auth.user.username}
-                </p>
-              )}
-              <div className="navbar-buttons">
-                {!this.props.auth.isAuthenticated && (
-                  <div>
-                    <a href="/register" className="submit-btn">
-                      <strong>Register</strong>
-                    </a>
-                    <a href="/login" className="submit-btn">
-                      Log in
-                    </a>
-                  </div>
-                )}
-                {this.props.auth.isAuthenticated && (
-                  <a href="/" onClick={this.handleLogOut} className="submit-btn">
-                    Log out
+          
+    
+          <div className="navbar-buttons">
+            <div>
+                {this.props.auth.isAuthenticated && this.props.auth.user && (
+                  <a href="#" className="navbar-hello">
+                    Hello, {this.props.auth.user.username}!
                   </a>
                 )}
-              </div>
             </div>
+            {!this.props.auth.isAuthenticated && (
+              <div>
+                <a href="/register" className="navbar-link">
+                  Register
+                </a>
+                <a href="/login" className="navbar-link">
+                  Log in
+                </a>
+              </div>
+            )}
+            {this.props.auth.isAuthenticated && (
+              <a href="/" onClick={this.handleLogOut} className="navbar-link">
+                Log out
+              </a>
+            )}
           </div>
-        </div>
       </nav>
     )
   }

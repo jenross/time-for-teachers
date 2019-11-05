@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
+import './Register.css'
 
 class Register extends Component {
   state = {
@@ -72,8 +73,8 @@ class Register extends Component {
   render() {
     return (
       <section className="section auth">
-        <div className="container">
-          <h1>Register</h1>
+        <div className="form-container">
+          <h1 className="form-header">Register</h1>
           <FormErrors formerrors={this.state.errors} />
 
           <form onSubmit={this.handleSubmit}>
@@ -138,12 +139,12 @@ class Register extends Component {
             </div>
             <div className="field">
               <p className="control">
-                <a href="/forgotpassword">Forgot password?</a>
+                <a className="forgot-link" href="/forgotpassword">Forgot password?</a>
               </p>
             </div>
             <div className="field">
               <p className="control">
-                <button className="button is-success">
+                <button className="submit-btn is-success">
                   Register
                 </button>
               </p>
