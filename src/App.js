@@ -11,6 +11,8 @@ import ChangePassword from './components/auth/ChangePassword';
 import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
 import Welcome from './components/auth/Welcome';
 import Footer from './components/Footer';
+import Dashboard from './components/auth/Dashboard';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { Auth } from 'aws-amplify';
 
 class App extends Component {
@@ -54,6 +56,7 @@ class App extends Component {
     return (
       !this.state.isAuthenticating &&
       <div className="App">
+        <CssBaseline />
         <Router>
           <div>
             <Navbar auth={authProps} />
@@ -66,6 +69,7 @@ class App extends Component {
               <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
               <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
+              <Route exact path="/dashboard" render={(props) => <Dashboard {...props} auth={authProps} />} />
             </Switch>
             <Footer />
           </div>

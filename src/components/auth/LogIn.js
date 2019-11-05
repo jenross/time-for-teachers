@@ -41,7 +41,7 @@ class LogIn extends Component {
       console.log(user);
       this.props.auth.setAuthStatus(true);
       this.props.auth.setUser(user);
-      this.props.history.push("/");
+      this.props.history.push("/dashboard");
     }catch(error) {
       let err = null;
       !error.message ? err = { "message": error } : err = error;
@@ -104,7 +104,7 @@ class LogIn extends Component {
             </div>
             <div className="field">
               <p className="control">
-                <button className="submit-btn is-success">
+                <button className="submit-btn is-success" href="/dashboard">
                   Login
                 </button>
               </p>

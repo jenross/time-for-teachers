@@ -3,14 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.6.0",
+    "@material-ui/icons": "^4.5.1",
     "aws-amplify": "^1.2.4",
     "aws-amplify-react": "^2.5.4",
+    "chartist": "^0.11.4",
+    "classnames": "^2.2.6",
     "dotenv": "^8.2.0",
+    "history": "^4.10.1",
     "mongoose": "^5.7.7",
+    "perfect-scrollbar": "^1.4.0",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
+    "react-chartist": "^0.13.3",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "react-swipeable-views": "^0.13.3"
   },
   "scripts": {
     "start": "react-scripts start",
