@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from 'aws-amplify';
+import './forms.css'
 
 class ForgotPassword extends Component {
   state = {
@@ -52,9 +53,9 @@ class ForgotPassword extends Component {
   render() {
     return (
       <section className="section auth">
-        <div className="container">
-          <h1>Forgot your password?</h1>
-          <p>
+        <div className="form-container">
+          <h1 className="form-header">Forgot your password?</h1>
+          <p className="directions">
             Please enter the email address associated with your account and we'll
             email you a password reset link.
           </p>
@@ -78,12 +79,7 @@ class ForgotPassword extends Component {
             </div>
             <div className="field">
               <p className="control">
-                <a href="/forgotpassword">Forgot password?</a>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control">
-                <button className="button is-success">
+                <button className="submit-btn is-success">
                   Submit
                 </button>
               </p>
