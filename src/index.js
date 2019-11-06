@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import Amplify from "aws-amplify";
 import config from "./config.js";
+// import { Router, Route, Switch, Redirect } from "react-router-dom";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// import AdminLayout from "layouts/Admin.jsx";
+// import AuthLayout from "layouts/Auth.jsx";
 import * as serviceWorker from './serviceWorker';
 
 

@@ -1,8 +1,21 @@
-import React, { Component } from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 import { Auth } from 'aws-amplify';
-import './Navbar.css';
+// import './Navbar.css';
 
-export default class Navbar extends Component {
+class AuthNavbar extends React.Component {
+  // state = {
+  //   isOpen: false
+  // };
+  // toggle = () => {
+  //   this.setState({
+  //     isOpen: !this.state.isOpen
+  //   });
+  // };
+  // verifies if routeName is the one active (in browser input)
+  // activeRoute = routeName => {
+  //   return window.location.href.indexOf(routeName) > -1 ? "active" : "";
+  // };
   handleLogOut = async event => {
     event.preventDefault();
     try {
@@ -51,6 +64,11 @@ export default class Navbar extends Component {
             )}
           </div>
       </nav>
-    )
+      
+      
+  );
+
+    
   }
 }
+export default AuthNavbar;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar';
+import AuthNavbar from './components/AuthNavbar';
 import Home from './components/Home';
 import LogIn from './components/auth/LogIn';
 import Register from './components/auth/Register';
@@ -57,7 +57,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
-            <Navbar auth={authProps} />
+            <AuthNavbar auth={authProps} />
             <Switch>
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
               <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
