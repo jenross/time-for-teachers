@@ -1,5 +1,6 @@
 import React from 'react';
-import Workers from './images/busy-time-workers.png'
+// import Workers from './images/busy-time-workers.png'
+import Time from './images/red-alarm.png';
 import './Hero.css'
 
 export default function Hero() {
@@ -7,7 +8,7 @@ export default function Hero() {
     <section className="hero-container">
       <div className="hero-body">
         <div>
-          <img className='hero-img' src={Workers} alt="busy workers with giant clock" />
+          <img className='hero-img' src={Time} alt="clocks" />
         </div>
       </div>
     </section>

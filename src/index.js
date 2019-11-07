@@ -6,7 +6,12 @@ import Amplify from "aws-amplify";
 import config from "./config.js";
 // import { Router, Route, Switch, Redirect } from "react-router-dom";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// styles
+import "assets/css/bootstrap.min.css";
+import "assets/scss/now-ui-kit.scss";
+import "assets/demo/demo.css";
+import "assets/demo/react-demo.css";
+import "assets/demo/nucleo-icons-page-styles.css";
 
 // import AdminLayout from "layouts/Admin.jsx";
 // import AuthLayout from "layouts/Auth.jsx";
