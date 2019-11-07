@@ -15,13 +15,16 @@ import {
   Table,
   Row,
   Button,
+  Nav, 
+  NavLink,
+  NavItem,
   FormGroup,
   Label, 
   Input,
   Col
 } from "reactstrap";
 
-class Dashboard extends React.Component {
+function Dashboard() {
     // state = {
 
     // }
@@ -37,7 +40,8 @@ class Dashboard extends React.Component {
     //         errors: { ...this.state.errors, ...error }
     //       });
     //     }
-    render() {
+    
+      const [tabs, setTabs] = React.useState("1");
       return (
         <React.Fragment>
            <>
@@ -87,6 +91,7 @@ class Dashboard extends React.Component {
                     </Card>
                   </Col>
                 <Col xs={12} md={8}>
+                  <CardTitle tag="h4">Tasks</CardTitle>
                   {/* <Card className="card-plain">
                     <CardHeader>
                       <CardTitle tag="h4">Tasks</CardTitle>
@@ -128,13 +133,84 @@ class Dashboard extends React.Component {
                       </Table>
                     </CardBody>
                   </Card> */}
+                  <Card>
+                <CardHeader>
+                  <Nav
+                    className="weekday-header nav-tabs-neutral justify-content-center"
+                    // data-background-color="blue"
+                    role="tablist"
+                    tabs
+                  >
+                    <NavItem>
+                      <NavLink
+                        className={tabs === "1" ? "active" : ""}
+                        href="#pablo"
+                        onClick={e => {
+                          e.preventDefault();
+                          setTabs("1");
+                        }}
+                      >
+                        Monday
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        className={tabs === "2" ? "active" : ""}
+                        href="#pablo"
+                        onClick={e => {
+                          e.preventDefault();
+                          setTabs("2");
+                        }}
+                      >
+                        Tuesday
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        className={tabs === "3" ? "active" : ""}
+                        href="#pablo"
+                        onClick={e => {
+                          e.preventDefault();
+                          setTabs("3");
+                        }}
+                      >
+                        Wednesday
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        className={tabs === "4" ? "active" : ""}
+                        href="#pablo"
+                        onClick={e => {
+                          e.preventDefault();
+                          setTabs("4");
+                        }}
+                      >
+                        Thursday
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        className={tabs === "5" ? "active" : ""}
+                        href="#pablo"
+                        onClick={e => {
+                          e.preventDefault();
+                          setTabs("5");
+                        }}
+                      >
+                        Friday
+                      </NavLink>
+                    </NavItem>
+                  </Nav>
+                </CardHeader>
+                </Card>
                    <Card className="card-plain">
                     <CardHeader>
-                      <CardTitle tag="h4">Tasks</CardTitle>
+                      {/* <CardTitle tag="h4">Tasks</CardTitle> */}
                     </CardHeader>
                     <CardBody>
                       <Table responsive striped>
-                        <thead className="text-center">
+                        {/* <thead className="text-center">
                           <tr>
                             <th className="text-center">Monday</th>
                             <th className="text-center">Tuesday</th>
@@ -142,7 +218,7 @@ class Dashboard extends React.Component {
                             <th className="text-center">Thursday</th>
                             <th className="text-center">Friday</th>
                           </tr>
-                        </thead>
+                        </thead> */}
                         <tbody>
                           <tr>
                             <td className="text-center">
@@ -323,6 +399,6 @@ class Dashboard extends React.Component {
         </React.Fragment>
     );
   }
-}
+
 
 export default Dashboard;
