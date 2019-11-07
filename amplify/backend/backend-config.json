@@ -1,0 +1,9 @@
+{
+  "auth": {
+    "timeforteachersdb06e248": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
+  }
+}

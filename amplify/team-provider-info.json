@@ -1,0 +1,19 @@
+{
+    "test": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-time-for-teachers-test-220418-authRole",
+            "UnauthRoleArn": "arn:aws:iam::094151345247:role/amplify-time-for-teachers-test-220418-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::094151345247:role/amplify-time-for-teachers-test-220418-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-time-for-teachers-test-220418-deployment",
+            "UnauthRoleName": "amplify-time-for-teachers-test-220418-unauthRole",
+            "StackName": "amplify-time-for-teachers-test-220418",
+            "StackId": "arn:aws:cloudformation:us-east-1:094151345247:stack/amplify-time-for-teachers-test-220418/161a8c90-fd15-11e9-a68d-12c270bd7978"
+        },
+        "categories": {
+            "auth": {
+                "timeforteachersdb06e248": {}
+            }
+        }
+    }
+}
