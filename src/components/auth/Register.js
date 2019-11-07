@@ -72,86 +72,89 @@ class Register extends Component {
 
   render() {
     return (
-      <section className="section auth">
-        <div className="form-container">
-          <h1 className="form-header">Register</h1>
-          <FormErrors formerrors={this.state.errors} />
+      <React.Fragment>
+      
+        <section className="section auth">
+          <div className="form-container">
+            <h1 className="form-header">Register</h1>
+            <FormErrors formerrors={this.state.errors} />
 
-          <form onSubmit={this.handleSubmit}>
-            <div className="field">
-              <p className="control">
-                <input 
-                  className="input" 
-                  type="text"
-                  id="username"
-                  aria-describedby="userNameHelp"
-                  placeholder="Enter username"
-                  value={this.state.username}
-                  onChange={this.onInputChange}
-                />
-              </p>
-            </div>
-            <div className="field">
-              <p className="control has-icons-left has-icons-right">
-                <input 
-                  className="input" 
-                  type="email"
-                  id="email"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                  value={this.state.email}
-                  onChange={this.onInputChange}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-envelope"></i>
-                </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control has-icons-left">
-                <input 
-                  className="input" 
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={this.onInputChange}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-lock"></i>
-                </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control has-icons-left">
-                <input 
-                  className="input" 
-                  type="password"
-                  id="confirmpassword"
-                  placeholder="Confirm password"
-                  value={this.state.confirmpassword}
-                  onChange={this.onInputChange}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-lock"></i>
-                </span>
-              </p>
-            </div>
-            <div className="form-bottom">
-              <p className="control">
-                <a className="forgot-link" href="/forgotpassword">Forgot password?</a>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control">
-                <button className="submit-btn is-success">
-                  Register
-                </button>
-              </p>
-            </div>
-          </form>
-        </div>
-      </section>
+            <form onSubmit={this.handleSubmit}>
+              <div className="field">
+                <p className="control">
+                  <input 
+                    className="input" 
+                    type="text"
+                    id="username"
+                    aria-describedby="userNameHelp"
+                    placeholder="Enter username"
+                    value={this.state.username}
+                    onChange={this.onInputChange}
+                  />
+                </p>
+              </div>
+              <div className="field">
+                <p className="control has-icons-left has-icons-right">
+                  <input 
+                    className="input" 
+                    type="email"
+                    id="email"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email"
+                    value={this.state.email}
+                    onChange={this.onInputChange}
+                  />
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-envelope"></i>
+                  </span>
+                </p>
+              </div>
+              <div className="field">
+                <p className="control has-icons-left">
+                  <input 
+                    className="input" 
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    value={this.state.password}
+                    onChange={this.onInputChange}
+                  />
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-lock"></i>
+                  </span>
+                </p>
+              </div>
+              <div className="field">
+                <p className="control has-icons-left">
+                  <input 
+                    className="input" 
+                    type="password"
+                    id="confirmpassword"
+                    placeholder="Confirm password"
+                    value={this.state.confirmpassword}
+                    onChange={this.onInputChange}
+                  />
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-lock"></i>
+                  </span>
+                </p>
+              </div>
+              <div className="form-bottom">
+                <p className="control">
+                  <a className="forgot-link" href="/forgotpassword">Forgot password?</a>
+                </p>
+              </div>
+              <div className="field">
+                <p className="control">
+                  <button className="submit-btn is-success">
+                    Register
+                  </button>
+                </p>
+              </div>
+            </form>
+          </div>
+        </section>
+      </React.Fragment>
     );
   }
 }

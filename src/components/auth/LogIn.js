@@ -63,6 +63,8 @@ class LogIn extends Component {
 
   render() {
     return (
+      <React.Fragment>
+  
       <section className="section auth">
         <div className="form-container">
           <h1 className="form-header">Log in</h1>
@@ -112,6 +114,7 @@ class LogIn extends Component {
           </form>
         </div>
       </section>
+      </React.Fragment>
     );
   }
 }

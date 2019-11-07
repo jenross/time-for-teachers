@@ -11,7 +11,7 @@ import ChangePassword from './components/auth/ChangePassword';
 import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
 import Welcome from './components/auth/Welcome';
 import Footer from './components/Footer';
-import Dashboard from './components/auth/Dashboard';
+import Dashboard from './components/Dashboard';
 import { Auth } from 'aws-amplify';
 
 // styles
@@ -40,6 +40,7 @@ class App extends Component {
   async componentDidMount() {
     try {
       // const session = await Auth.currentSession();
+      //true or false here? 
       this.setAuthStatus(true);
       const user = await Auth.currentAuthenticatedUser();
       this.setUser(user);
