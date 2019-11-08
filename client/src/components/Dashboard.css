@@ -1,0 +1,20 @@
+.dashboard-container {
+    display: flex; 
+}
+
+.dashboard-header {
+    text-align: center; 
+}
+
+.content {
+    margin-top: 80px; 
+    padding: 20px; 
+}
+
+.add-btn {
+    width: 30px;
+}
+
+.weekday-header {
+    background-color: #EA543A;
+}

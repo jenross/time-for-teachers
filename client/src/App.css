@@ -1,0 +1,16 @@
+* {
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+.App {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column; 
+  width: 100%;
+  font-family: "Roboto", sans-serif; 
+}
+
+
