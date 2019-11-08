@@ -38,8 +38,8 @@ export default class Dashboard extends Component {
     API.getUserData(localStorage.getItem("email"))
       .then(res => {
         this.setState({
-          userData: res.data
-          // grading: "",
+          userData: res.data,
+          grading: 0
           // lessonPlanning: "",
           // specialEventPlanning: "",
           // communications: "",
@@ -48,6 +48,8 @@ export default class Dashboard extends Component {
           // continuingEducation: "",
           // other: ""
         });
+
+        console.log("AT MOUNT", this.state.userData);
       })
       .then(this.getGradingSum())
       .catch(err => console.log(err));
@@ -112,8 +114,12 @@ export default class Dashboard extends Component {
                             </FormGroup>
                           </td>
                           <td>Grading</td>
-
                           <div>{this.getGradingSum()}</div>
+                          {/* <div>
+                            {this.state.userData.map( => (
+                              <div>{grading}</div>
+                            ))}
+                          </div> */}
 
                           <td>
                             <FormGroup>
