@@ -8,7 +8,8 @@ export default class Timer extends Component {
     clockRunning: false,
     converted: "00:00",
     grading: "",
-    confirmation: ""
+    confirmation: "",
+    menuSelection: ""
   };
 
   submitTime = () => {
@@ -55,7 +56,7 @@ export default class Timer extends Component {
     event.preventDefault();
     if (counter !== 0 && !this.state.clockRunning) {
       API.saveUserData({
-        grading: this.state.time,
+        [this.state.menuSelection]: this.state.time,
         email: localStorage.getItem("email")
       })
         .then(
@@ -72,10 +73,28 @@ export default class Timer extends Component {
   };
 
   render() {
+    console.log(this.state.menuSelection);
     return (
       <div className="wrapper">
         <div>
-          <button>grading</button>
+          <button onClick={() => this.setState({ menuSelection: "grading" })}>
+            grading
+          </button>
+          <button
+            onClick={() => this.setState({ menuSelection: "lessonPlanning" })}
+          >
+            Lesson Planning
+          </button>
+          <button
+            onClick={() => this.setState({ menuSelection: "communications" })}
+          >
+            Communications
+          </button>
+          <button
+            onClick={() => this.setState({ menuSelection: "specialEventPlanning" })}
+          >
+            Special Event Planning
+          </button>
         </div>
         <div className="display">{this.state.converted}</div>
         <div className="buttons">

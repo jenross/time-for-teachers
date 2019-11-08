@@ -1,11 +1,8 @@
-// import React from "react";
 import React, { Component } from "react";
 import API from "./utility/API";
 
-// import { withAuthenticator } from 'aws-amplify-react';
 import "./Dashboard.css";
-// import Sidebar from './Sidebar';
-// import TaskTable from './TaskTable'
+
 import PanelHeader from "./PanelHeader";
 import Play from "./images/ic_play_circle_filled_white_48px.svg";
 import Stop from "./images/ic_stop_48px.svg";
@@ -17,67 +14,67 @@ import {
   CardTitle,
   Table,
   Row,
-  Button,
-  Nav,
-  NavLink,
-  NavItem,
   FormGroup,
   Label,
   Input,
   Col
 } from "reactstrap";
+import Timer from "./Timer";
 
 export default class Dashboard extends Component {
   state = {
-    userData: [],
-    grading: "",
-    lessonPlanning: "",
-    specialEventPlanning: "",
-    communications: "",
-    paperwork: "",
-    training: "",
-    continuingEducation: "",
-    other: ""
+    userData: []
+    // grading: "",
+    // lessonPlanning: "",
+    // specialEventPlanning: "",
+    // communications: "",
+    // paperwork: "",
+    // training: "",
+    // continuingEducation: "",
+    // other: ""
   };
-  // state = {
-
-  // }
-
-  // handleSubmit = async event => {
-  //     event.preventDefault();
-
-  //     // Form validation
-  //     this.clearErrorState();
-  //     const error = Validate(event, this.state);
-  //     if (error) {
-  //       this.setState({
-  //         errors: { ...this.state.errors, ...error }
-  //       });
-  //     }
 
   componentDidMount() {
-    // loadUserData = () => {
     API.getUserData(localStorage.getItem("email"))
       .then(res => {
         this.setState({
-          userData: res.data,
-          grading: "",
-          lessonPlanning: "",
-          specialEventPlanning: "",
-          communications: "",
-          paperwork: "",
-          training: "",
-          continuingEducation: "",
-          other: ""
+          userData: res.data
+          // grading: "",
+          // lessonPlanning: "",
+          // specialEventPlanning: "",
+          // communications: "",
+          // paperwork: "",
+          // training: "",
+          // continuingEducation: "",
+          // other: ""
         });
-        return console.log();
       })
+      .then(this.getGradingSum())
       .catch(err => console.log(err));
-    // };
   }
+
+  getGradingSum = () => {
+    return this.state.userData
+      .map(data => parseInt(data.grading))
+      .reduce((a, b) => a + b, 0);
+  };
+
+  // getLessonPlanningSum = () => {
+  //   return this.state.userData
+  //     .map(
+  //       data => parseInt(data.lessonPlanning)
+  //       // <div key={data._id}>
+  //       //   {console.log(data)}
+  //       //   {/* <p>{data.grading.reduce((a, b) => a + b, 0)}</p> */}
+  //       // </div>
+  //     )
+  //     .reduce((a, b) => a + b, 0);
+  // };
 
   // const [tabs, setTabs] = React.useState("1");
   render() {
+    console.log("get sum", this.getGradingSum());
+    console.log(this.state.userData);
     return (
       <React.Fragment>
         <>
@@ -93,155 +90,17 @@ export default class Dashboard extends Component {
                   }}
                 >
                   <CardBody>
-                    <h5 className="category text-info">Timer</h5>
-                    <CardTitle className="time" tag="h1">
-                      2:30
-                    </CardTitle>
-                    <div className="icons-nucleo">
-                      <img
-                        className="play-button"
-                        src={Play}
-                        alt="play button"
-                      />
-                      <img
-                        className="stop-button"
-                        src={Stop}
-                        alt="stop button"
-                      />
-                    </div>
+                    <Timer />
                   </CardBody>
-                  
                 </Card>
               </Col>
               <Col xs={12} md={8}>
                 <CardTitle tag="h4">Tasks</CardTitle>
-                {/* <Card className="card-plain">
-                    <CardHeader>
-                      <CardTitle tag="h4">Tasks</CardTitle>
-                    </CardHeader>
-                    <CardBody>
-                      <Table responsive>
-                        <thead className="text-primary">
-                          <tr>
-                            <th>Monday</th>
-                            <th>Tuesday</th>
-                            <th>Wednesday</th>
-                            <th>Thursday</th>
-                            <th>Friday</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                              <tr>
-                                <td>Grading</td>
-                              </tr>
-                              <tr>
-                                <td>Lesson Planning</td>
-                              </tr>
-                              <tr>
-                                <td>Planning & Organizing Special Events</td>
-                              </tr>
-                              <tr>
-                                <td>Communication</td>
-                              </tr>
-                              <tr>
-                                <td>Legal Documentation & Paperwork</td>
-                              </tr>
-                              <tr>
-                                <td>Mandatory Trainings & Continuing Education</td>
-                              </tr>
-                              <tr>
-                                <td>Other</td>
-                              </tr>
-                        </tbody>
-                      </Table>
-                    </CardBody>
-                  </Card> */}
-                {/* <Card>
-                  <CardHeader>
-                    <Nav
-                      className="weekday-header nav-tabs-neutral justify-content-center"
-                      // data-background-color="blue"
-                      role="tablist"
-                      tabs
-                    >
-                      <NavItem>
-                        <NavLink
-                          className={tabs === "1" ? "active" : ""}
-                          href="#pablo"
-                          onClick={e => {
-                            e.preventDefault();
-                            setTabs("1");
-                          }}
-                        >
-                          Monday
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          className={tabs === "2" ? "active" : ""}
-                          href="#pablo"
-                          onClick={e => {
-                            e.preventDefault();
-                            setTabs("2");
-                          }}
-                        >
-                          Tuesday
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          className={tabs === "3" ? "active" : ""}
-                          href="#pablo"
-                          onClick={e => {
-                            e.preventDefault();
-                            setTabs("3");
-                          }}
-                        >
-                          Wednesday
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          className={tabs === "4" ? "active" : ""}
-                          href="#pablo"
-                          onClick={e => {
-                            e.preventDefault();
-                            setTabs("4");
-                          }}
-                        >
-                          Thursday
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          className={tabs === "5" ? "active" : ""}
-                          href="#pablo"
-                          onClick={e => {
-                            e.preventDefault();
-                            setTabs("5");
-                          }}
-                        >
-                          Friday
-                        </NavLink>
-                      </NavItem>
-                    </Nav>
-                  </CardHeader>
-                </Card> */}
+
                 <Card className="card-plain">
-                  <CardHeader>
-                    {/* <CardTitle tag="h4">Tasks</CardTitle> */}
-                  </CardHeader>
+                  <CardHeader></CardHeader>
                   <CardBody>
                     <Table responsive striped>
-                      {/* <thead className="text-center">
-                          <tr>
-                            <th className="text-center">Monday</th>
-                            <th className="text-center">Tuesday</th>
-                            <th className="text-center">Wednesday</th>
-                            <th className="text-center">Thursday</th>
-                            <th className="text-center">Friday</th>
-                          </tr>
-                        </thead> */}
                       <tbody>
                         <tr>
                           <td className="text-center">
@@ -253,14 +112,9 @@ export default class Dashboard extends Component {
                             </FormGroup>
                           </td>
                           <td>Grading</td>
-                          {/* <h1>{this.state.userData[2]._id}</h1> */}
-                          <div>
-                            {this.state.userData.map(data => (
-                              <div key={data._id}>
-                                <p>{data.grading}</p>
-                              </div>
-                            ))}
-                          </div>
+
+                          <div>{this.getGradingSum()}</div>
+
                           <td>
                             <FormGroup>
                               <Input
@@ -289,6 +143,8 @@ export default class Dashboard extends Component {
                             </FormGroup>
                           </td>
                           <td>Lesson Planning</td>
+                          {/* <div>{this.getLessonPlanningSum()}</div> */}
+
                           <td>
                             <FormGroup>
                               <Input
@@ -441,11 +297,6 @@ export default class Dashboard extends Component {
                             />
                           </td>
                         </tr>
-                        {/* <tr>
-                            <td colSpan="5"></td>
-                            <td className="td-total">Total</td>
-                            <td className="td-price">€ 35,999</td>
-                          </tr> */}
                       </tbody>
                     </Table>
                   </CardBody>
