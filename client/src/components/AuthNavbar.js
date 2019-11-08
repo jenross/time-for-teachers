@@ -11,6 +11,7 @@ class AuthNavbar extends Component {
       Auth.signOut();
       this.props.auth.setAuthStatus(false);
       this.props.auth.setUser(null);
+      localStorage.clear();
       this.props.history.push("/");
     } catch (error) {
       console.log(error.message);

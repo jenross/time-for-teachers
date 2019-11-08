@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
-import { Auth } from 'aws-amplify';
-import './forms.css'
+import { Auth } from "aws-amplify";
+import { Redirect } from "react-router-dom";
 
-class ChangePassword extends Component {
+import "./forms.css";
+
+class ForgotPasswordVerification extends Component {
   state = {
-    oldpassword: "",
+    verificationcode: "",
+    email: "",
     newpassword: "",
-    confirmpassword: "",
     errors: {
       cognito: null,
-      blankfield: false,
-      passwordmatch: false
+      blankfield: false
     }
-  }
+  };
 
   clearErrorState = () => {
     this.setState({
       errors: {
         cognito: null,
-        blankfield: false,
-        passwordmatch: false
+        blankfield: false
       }
     });
-  }
+  };
 
-  handleSubmit = async event => {
+  passwordVerificationHandler = async event => {
     event.preventDefault();
 
     // Form validation
@@ -40,59 +40,73 @@ class ChangePassword extends Component {
 
     // AWS Cognito integration here
     try {
-      const user = await Auth.currentAuthenticatedUser();
-      console.log(user);
-      await Auth.changePassword(
-        user,
-        this.state.oldpassword,
+      await Auth.forgotPasswordSubmit(
+        this.state.email,
+        this.state.verificationcode,
         this.state.newpassword
       );
       this.props.history.push("/changepasswordconfirmation");
     } catch (error) {
-      let err = null;
-      !error.message ? err = { "message": error } : err = error;
-      this.setState({
-        errors: { ...this.state.errors, cognito: err }
-      });
-      console.log(err);
+      console.log(error);
     }
-  }
+  };
 
   onInputChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
     document.getElementById(event.target.id).classList.remove("is-danger");
-  }
+  };
 
   render() {
+    if (localStorage.getItem("authenticated")) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <section className="section auth">
-        <div className="form-container">
-          <h1 className="form-header">Change Password</h1>
+        <div className="container">
+          <h1 className="form-header">Set new password</h1>
+          <p>
+            Please enter the verification code sent to your email address below,
+            your email address and a new password.
+          </p>
           <FormErrors formerrors={this.state.errors} />
 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.passwordVerificationHandler}>
             <div className="field">
-              <p className="control has-icons-left">
-                <input 
-                  className="input" 
-                  type="password"
-                  id="oldpassword"
-                  placeholder="Old password"
-                  value={this.state.oldpassword}
+              <p className="control">
+                <input
+                  type="text"
+                  className="input"
+                  id="verificationcode"
+                  aria-describedby="verificationCodeHelp"
+                  placeholder="Enter verification code"
+                  value={this.state.verificationcode}
                   onChange={this.onInputChange}
                 />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-lock"></i>
-                </span>
               </p>
             </div>
             <div className="field">
               <p className="control has-icons-left">
                 <input
                   className="input"
+                  type="email"
+                  id="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                  value={this.state.email}
+                  onChange={this.onInputChange}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-envelope"></i>
+                </span>
+              </p>
+            </div>
+            <div className="field">
+              <p className="control has-icons-left">
+                <input
                   type="password"
+                  className="input"
                   id="newpassword"
                   placeholder="New password"
                   value={this.state.newpassword}
@@ -104,30 +118,8 @@ class ChangePassword extends Component {
               </p>
             </div>
             <div className="field">
-              <p className="control has-icons-left">
-                <input
-                  className="input"
-                  type="password"
-                  id="confirmpassword"
-                  placeholder="Confirm password"
-                  value={this.state.confirmpassword}
-                  onChange={this.onInputChange}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-lock"></i>
-                </span>
-              </p>
-            </div>
-            <div className="form-bottom">
               <p className="control">
-                <a className="forgot-link" href="/forgotpassword">Forgot password?</a>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control">
-                <button className="submit-btn is-success">
-                  Change password
-                </button>
+                <button className="submit-btn is-success">Submit</button>
               </p>
             </div>
           </form>
@@ -137,4 +129,4 @@ class ChangePassword extends Component {
   }
 }
 
-export default ChangePassword;
+export default ForgotPasswordVerification;

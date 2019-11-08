@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
-import { Auth } from 'aws-amplify';
-import './forms.css'
+import { Auth } from "aws-amplify";
+import { Redirect } from "react-router-dom";
+
+import "./forms.css";
 
 class ForgotPassword extends Component {
   state = {
@@ -11,7 +13,7 @@ class ForgotPassword extends Component {
       cognito: null,
       blankfield: false
     }
-  }
+  };
 
   clearErrorState = () => {
     this.setState({
@@ -20,7 +22,7 @@ class ForgotPassword extends Component {
         blankfield: false
       }
     });
-  }
+  };
 
   forgotPasswordHandler = async event => {
     event.preventDefault();
@@ -37,27 +39,30 @@ class ForgotPassword extends Component {
     // AWS Cognito integration here
     try {
       await Auth.forgotPassword(this.state.email);
-      this.props.history.push('/forgotpasswordverification');
-    }catch(error) {
+      this.props.history.push("/forgotpasswordverification");
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   onInputChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
     document.getElementById(event.target.id).classList.remove("is-danger");
-  }
+  };
 
   render() {
+    if (localStorage.getItem("authenticated")) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <section className="section auth">
         <div className="form-container">
           <h1 className="form-header">Forgot your password?</h1>
           <p className="directions">
-            Please enter the email address associated with your account and we'll
-            email you a password reset link.
+            Please enter the email address associated with your account and
+            we'll email you a password reset link.
           </p>
           <FormErrors formerrors={this.state.errors} />
           <form onSubmit={this.forgotPasswordHandler}>
@@ -79,9 +84,7 @@ class ForgotPassword extends Component {
             </div>
             <div className="field">
               <p className="control">
-                <button className="submit-btn is-success">
-                  Submit
-                </button>
+                <button className="submit-btn is-success">Submit</button>
               </p>
             </div>
           </form>
