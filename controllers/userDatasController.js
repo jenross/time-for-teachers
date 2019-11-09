@@ -29,25 +29,16 @@ module.exports = {
   //   });
   // },
   create(req, res) {
-    console.log("the body: ", req.body);
-    console.log("the param: ", req.params.category);
+    // console.log("the body: ", req.body);
+    // console.log("the param: ", req.params.category);
     db.User.findOne({ email: req.body.email }).then(results => {
-      console.log(results._id);
+      // console.log(results._id);
       db.UserData.findOneAndUpdate(
         { user: results._id },
         {
           $push: { time: req.body }
         }
       )
-
-        // .then(dbModel => {
-        //   console.log("the model", dbModel);
-        //   return db.User.findOneAndUpdate(
-        //     { email: req.body.email },
-        //     { $push: { userdata: dbModel._id } },
-        //     { upsert: true, new: true }
-        //   );
-        // })
         .then(dbModel => {
           console.log("the dbModel", dbModel);
           res.json(dbModel);
@@ -64,9 +55,5 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     });
-    // findAll: function(req, res) {
-    //   db.UserData.findOne({ email: req.params.email })
-    //     .then(dbModel => res.json(dbModel))
-    //     .catch(err => res.status(422).json(err));
   }
 };

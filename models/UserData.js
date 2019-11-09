@@ -11,7 +11,8 @@ const userDataSchema = new Schema({
       paperwork: { type: String, required: false },
       training: { type: String, required: false },
       continuingEducation: { type: String, required: false },
-      other: { type: String, required: false }
+      other: { type: String, required: false },
+      date: { type: Date, default: Date.now }
     }
   ],
   user: { type: Schema.Types.ObjectId, ref: "User" },

@@ -37,9 +37,7 @@ export default class Dashboard extends Component {
 
   //? ==============================================================//
   getSum = category => {
-    // console.log(category);
-
-    // return this.state.userData.find(data => data[category]);
+    console.log(category);
     return this.state.userData
       .filter(data => data[category])
       .map(data => parseInt(data[category]))
@@ -47,36 +45,24 @@ export default class Dashboard extends Component {
   };
 
   componentDidMount() {
-    API.getUserData(localStorage.getItem("email"))
+    API.checkUserData(localStorage.getItem("email"))
       .then(res => {
-        console.log(res.data);
         if (res.data.length === 0) {
-          API.createDocument(localStorage.getItem("email"));
+          API.createDocument(localStorage.getItem("email"))
+            .then(res)
+            .catch(err => console.log(err));
         }
+        console.log(res.data[0].time);
         this.setState({
-          userData: res.data
-          // grading: "",
-          // lessonPlanning: "",
-          // specialEventPlanning: "",
-          // communications: "",
-          // paperwork: "",
-          // training: "",
-          // continuingEducation: "",
-          // other: ""
-          // }).then(
-          //   API.findDocument(localStorage.getItem("email")).then(res =>
-          //     console.log(res.data)
-          //   )
-          // );
-          // this.getGradingSum();
+          userData: res.data[0].time
+ 
         });
       })
       .catch(err => console.log(err));
   }
 
   render() {
-    // console.log("This here, is the UserData", this.state.userData);
-    // console.log("get sum", this.getGradingSum());
+
     return (
       <React.Fragment>
         <>
