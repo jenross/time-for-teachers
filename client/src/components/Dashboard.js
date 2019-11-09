@@ -49,6 +49,10 @@ export default class Dashboard extends Component {
   componentDidMount() {
     API.getUserData(localStorage.getItem("email"))
       .then(res => {
+        console.log(res.data);
+        if (res.data.length === 0) {
+          API.createDocument(localStorage.getItem("email"));
+        }
         this.setState({
           userData: res.data
           // grading: "",
@@ -59,11 +63,14 @@ export default class Dashboard extends Component {
           // training: "",
           // continuingEducation: "",
           // other: ""
+          // }).then(
+          //   API.findDocument(localStorage.getItem("email")).then(res =>
+          //     console.log(res.data)
+          //   )
+          // );
+          // this.getGradingSum();
         });
-        console.log("AT MOUNT", this.state.userData);
-        this.getGradingSum();
       })
-      .then()
       .catch(err => console.log(err));
   }
 

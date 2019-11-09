@@ -54,7 +54,7 @@ export default class Timer extends Component {
   submitTime = event => {
     event.preventDefault();
     if (counter !== 0 && !this.state.clockRunning) {
-      API.saveUserData({
+      API.saveUserData(this.props.category,{
         [this.props.category]: this.state.time,
         email: localStorage.getItem("email")
       })
