@@ -94,3 +94,7 @@ dist/
 node_modules/
 aws-exports.js
 awsconfiguration.json
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
