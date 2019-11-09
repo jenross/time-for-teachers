@@ -15,12 +15,12 @@ module.exports = {
   },
 
   findAllUserData: function(req, res) {
-    console.log("findAllUserData ========== is getting hit");
+    // console.log("findAllUserData ========== is getting hit");
     db.User.findOne({ email: req.params.email }).then(results => {
-      console.log("results", results);
+      // console.log("results", results);
       db.UserData.find({ user: results._id })
         .then(dbModel => {
-          console.log("db_ model", dbModel);
+          // console.log("db_ model", dbModel);
           return res.json(dbModel);
           // return db.User.findOneAndUpdate(
           //   { email: req.body.email, user: results._id },
