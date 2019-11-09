@@ -14,7 +14,7 @@ module.exports = {
       };
       db.UserData.create(newData)
         .then(dbModel => {
-          console.log("the res ============", results._id);
+          // console.log("the res ============", results._id);
           return db.User.findOneAndUpdate(
             { email: req.body.email, user: results._id },
             { $push: { userdata: dbModel._id } },
@@ -24,5 +24,10 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => console.log(err));
     });
-  }
+  },
+  findAll: function(req, res) {
+    db.UserData.findOne({ email: req.params.email })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 };
