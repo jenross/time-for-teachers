@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import API from "./utility/API";
-import CategoryRow from "./CategoryRow";
-import "./Dashboard.css";
-import PanelHeader from "./PanelHeader";
+import API from "../utility/API";
+// import CategoryRow from "./CategoryRow";
+import "../Dashboard.css";
+import PanelHeader from "../PanelHeader";
 import {
   Card,
   CardBody,
@@ -10,39 +10,98 @@ import {
   CardTitle,
   Table,
   Row,
-  Col
+  Col,
+  FormGroup,
+  Label,
+  Input
 } from "reactstrap";
+import Add from "../images/ic_add_circle_48px.svg";
+
+let counter = 0;
 
 export default class Dashboard extends Component {
   state = {
-    categories: [
-      { name: "Grading", category: "grading", time: 0 },
-      { name: "Lesson Planning", category: "lessonPlanning" },
-      {
-        name: "Planning & Organizing Special Events",
-        category: "specialEventPlanning"
-      },
-      { name: "Communication", category: "communications" },
-      { name: "Legal Documentation & Paperwork", category: "paperwork" },
-      {
-        name: "Mandatory Trainings & Continuing Education",
-        category: "continuingEducation"
-      },
-      { name: "Other", category: "other" }
-    ],
-    userData: []
+    userData: [],
+    grading: "",
+    lessonPlanning: "",
+    specialEventPlanning: "",
+    communications: "",
+    paperwork: "",
+    training: "",
+    continuingEducation: "",
+    other: "",
+
+    time: 0,
+    clockRunning: false,
+    converted: "00:00",
+    confirmation: ""
+  };
+
+  //? =============================TIME FUNCTIONS=================================//
+  submitTime = () => {
+    counter = 0;
+    this.setState({ time: counter });
+  };
+
+  timeConverter = t => {
+    let minutes = Math.floor(t / 60);
+    let seconds = t - minutes * 60;
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    if (minutes === 0) {
+      minutes = "00";
+    } else if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    const convertedTime = minutes + ":" + seconds;
+    this.setState({ converted: convertedTime });
+  };
+
+  count = () => {
+    counter++;
+    this.setState({ time: counter });
+    this.timeConverter(counter);
+  };
+
+  startClock = () => {
+    if (!this.state.clockRunning) {
+      let intervalId = setInterval(this.count, 1000);
+      this.setState({ clockRunning: true, intervalId: intervalId });
+    }
+  };
+
+  stopClock = () => {
+    console.log("stop");
+    clearInterval(this.state.intervalId);
+    this.setState({ clockRunning: false });
+  };
+
+  submitTime = event => {
+    event.preventDefault();
+    if (counter !== 0 && !this.state.clockRunning) {
+      API.saveUserData({
+        [this.props.category]: this.state.time,
+        email: localStorage.getItem("email")
+      })
+        .then(
+          this.setState({
+            confirmation: "time submitted",
+            time: 0,
+            converted: "00:00"
+          })
+        )
+        .catch(err => console.log(err));
+    } else {
+      this.setState({ confirmation: "Cannot submitt" });
+    }
   };
 
   //? ==============================================================//
 
-  //? ==============================================================//
-  getSum = category => {
-    // console.log(category);
-
-    // return this.state.userData.find(data => data[category]);
+  getGradingSum = () => {
     return this.state.userData
-      .filter(data => data[category])
-      .map(data => parseInt(data[category]))
+      .map(data => parseInt(data.grading))
       .reduce((a, b) => a + b, 0);
   };
 
@@ -68,8 +127,8 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    // console.log("This here, is the UserData", this.state.userData);
-    // console.log("get sum", this.getGradingSum());
+    console.log("This here, is the UserData", this.state.userData);
+    console.log("get sum", this.getGradingSum());
     return (
       <React.Fragment>
         <>
@@ -81,7 +140,7 @@ export default class Dashboard extends Component {
                   className="card-pricing card-raised"
                   style={{
                     backgroundImage:
-                      "url(" + require("./images/pencil_bkgrnd.png") + ")"
+                      "url(" + require("../images/pencil_bkgrnd.png") + ")"
                   }}
                 ></Card>
               </Col>
@@ -92,28 +151,7 @@ export default class Dashboard extends Component {
                   <CardBody>
                     <Table responsive striped>
                       <tbody>
-                        {this.state.categories.map(x => (
-                          <CategoryRow
-                            getSum={this.getSum(x.category)}
-                            category={x.category}
-                            name={x.name}
-                            array={x}
-                          />
-                        ))}
-                      </tbody>
-                    </Table>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-          </div>
-        </>
-      </React.Fragment>
-    );
-  }
-}
-
-/* <tr>
+                        <tr>
                           <td className="text-center">
                             <FormGroup check>
                               <Label check>
@@ -122,15 +160,28 @@ export default class Dashboard extends Component {
                               </Label>
                             </FormGroup>
                           </td>
-                          <Timer />
+                          <td>
+                            <div className="wrapper">
+                              <div className="display">
+                                {this.state.converted}
+                              </div>
+                              <div className="buttons">
+                                <button onClick={this.startClock}>Start</button>
+                                <button onClick={this.stopClock}>Stop</button>
+                                <button onClick={this.submitTime}>
+                                  Submit
+                                </button>
+                              </div>
+                              <h1>{this.state.confirmation}</h1>
+                            </div>
+                          </td>{" "}
                           <td>Grading</td>
-                          <div>{this.getGradingSum()}</div>
-                          <div>
+                          {/* <div>{this.getGradingSum()}</div> */}
+                          {/* <div>
                             {this.state.userData.map( => (
                               <div>{grading}</div>
                             ))}
-                          </div>
-
+                          </div> */}
                           <td>
                             <FormGroup>
                               <Input
@@ -147,8 +198,8 @@ export default class Dashboard extends Component {
                               alt="add button"
                             />
                           </td>
-                        </tr> */
-/* <tr>
+                        </tr>
+                        <tr>
                           <td className="text-center">
                             <FormGroup check>
                               <Label check>
@@ -157,6 +208,22 @@ export default class Dashboard extends Component {
                               </Label>
                             </FormGroup>
                           </td>
+                          <td>
+                            <div className="wrapper">
+                              <div className="display">
+                                {this.state.converted}
+                              </div>
+                              <div className="buttons">
+                                <button onClick={this.startClock}>Start</button>
+                                <button onClick={this.stopClock}>Stop</button>
+                                <button onClick={this.submitTime}>
+                                  Submit
+                                </button>
+                              </div>
+                              <h1>{this.state.confirmation}</h1>
+                            </div>
+                          </td>
+
                           <td>Lesson Planning</td>
                           <td>
                             <FormGroup>
@@ -174,9 +241,9 @@ export default class Dashboard extends Component {
                               alt="add button"
                             />
                           </td>
-                        </tr> */
+                        </tr>
 
-/* <tr>
+                        <tr>
                           <td className="text-center">
                             <FormGroup check>
                               <Label check>
@@ -184,6 +251,21 @@ export default class Dashboard extends Component {
                                 <span className="form-check-sign"></span>
                               </Label>
                             </FormGroup>
+                          </td>
+                          <td>
+                            <div className="wrapper">
+                              <div className="display">
+                                {this.state.converted}
+                              </div>
+                              <div className="buttons">
+                                <button onClick={this.startClock}>Start</button>
+                                <button onClick={this.stopClock}>Stop</button>
+                                <button onClick={this.submitTime}>
+                                  Submit
+                                </button>
+                              </div>
+                              <h1>{this.state.confirmation}</h1>
+                            </div>
                           </td>
                           <td>Planning & Organizing Special Events</td>
                           <td>
@@ -202,9 +284,9 @@ export default class Dashboard extends Component {
                               alt="add button"
                             />
                           </td>
-                        </tr> */
+                        </tr>
 
-/* <tr>
+                        <tr>
                           <td className="text-center">
                             <FormGroup check>
                               <Label check>
@@ -212,6 +294,21 @@ export default class Dashboard extends Component {
                                 <span className="form-check-sign"></span>
                               </Label>
                             </FormGroup>
+                          </td>
+                          <td>
+                            <div className="wrapper">
+                              <div className="display">
+                                {this.state.converted}
+                              </div>
+                              <div className="buttons">
+                                <button onClick={this.startClock}>Start</button>
+                                <button onClick={this.stopClock}>Stop</button>
+                                <button onClick={this.submitTime}>
+                                  Submit
+                                </button>
+                              </div>
+                              <h1>{this.state.confirmation}</h1>
+                            </div>
                           </td>
                           <td>Communication</td>
                           <td>
@@ -230,9 +327,8 @@ export default class Dashboard extends Component {
                               alt="add button"
                             />
                           </td>
-                        </tr> */
-
-/* <tr>
+                        </tr>
+                        <tr>
                           <td className="text-center">
                             <FormGroup check>
                               <Label check>
@@ -240,6 +336,21 @@ export default class Dashboard extends Component {
                                 <span className="form-check-sign"></span>
                               </Label>
                             </FormGroup>
+                          </td>
+                          <td>
+                            <div className="wrapper">
+                              <div className="display">
+                                {this.state.converted}
+                              </div>
+                              <div className="buttons">
+                                <button onClick={this.startClock}>Start</button>
+                                <button onClick={this.stopClock}>Stop</button>
+                                <button onClick={this.submitTime}>
+                                  Submit
+                                </button>
+                              </div>
+                              <h1>{this.state.confirmation}</h1>
+                            </div>
                           </td>
                           <td>Legal Documentation & Paperwork</td>
                           <td>
@@ -258,9 +369,8 @@ export default class Dashboard extends Component {
                               alt="add button"
                             />
                           </td>
-                        </tr> */
-
-/* <tr>
+                        </tr>
+                        <tr>
                           <td className="text-center">
                             <FormGroup check>
                               <Label check>
@@ -268,6 +378,21 @@ export default class Dashboard extends Component {
                                 <span className="form-check-sign"></span>
                               </Label>
                             </FormGroup>
+                          </td>
+                          <td>
+                            <div className="wrapper">
+                              <div className="display">
+                                {this.state.converted}
+                              </div>
+                              <div className="buttons">
+                                <button onClick={this.startClock}>Start</button>
+                                <button onClick={this.stopClock}>Stop</button>
+                                <button onClick={this.submitTime}>
+                                  Submit
+                                </button>
+                              </div>
+                              <h1>{this.state.confirmation}</h1>
+                            </div>
                           </td>
                           <td>Mandatory Trainings & Continuing Education</td>
                           <td>
@@ -286,8 +411,8 @@ export default class Dashboard extends Component {
                               alt="add button"
                             />
                           </td>
-                        </tr> */
-/* <tr>
+                        </tr>
+                        <tr>
                           <td className="text-center">
                             <FormGroup check>
                               <Label check>
@@ -295,6 +420,21 @@ export default class Dashboard extends Component {
                                 <span className="form-check-sign"></span>
                               </Label>
                             </FormGroup>
+                          </td>
+                          <td>
+                            <div className="wrapper">
+                              <div className="display">
+                                {this.state.converted}
+                              </div>
+                              <div className="buttons">
+                                <button onClick={this.startClock}>Start</button>
+                                <button onClick={this.stopClock}>Stop</button>
+                                <button onClick={this.submitTime}>
+                                  Submit
+                                </button>
+                              </div>
+                              <h1>{this.state.confirmation}</h1>
+                            </div>
                           </td>
                           <td>Other</td>
                           <td>
@@ -313,4 +453,16 @@ export default class Dashboard extends Component {
                               alt="add button"
                             />
                           </td>
-                        </tr> */
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+          </div>
+        </>
+      </React.Fragment>
+    );
+  }
+}

@@ -17,6 +17,7 @@ class AuthNavbar extends Component {
       console.log(error.message);
     }
   };
+  
   render() {
     console.log("the props", this.props);
     return (

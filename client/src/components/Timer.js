@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "./utility/API";
+
 let counter = 0;
 
 export default class Timer extends Component {
@@ -7,7 +8,6 @@ export default class Timer extends Component {
     time: 0,
     clockRunning: false,
     converted: "00:00",
-    grading: "",
     confirmation: ""
   };
 
@@ -33,7 +33,6 @@ export default class Timer extends Component {
 
   count = () => {
     counter++;
-    console.log(counter);
     this.setState({ time: counter });
     this.timeConverter(counter);
   };
@@ -44,6 +43,7 @@ export default class Timer extends Component {
       this.setState({ clockRunning: true, intervalId: intervalId });
     }
   };
+
   stopClock = () => {
     console.log("stop");
     clearInterval(this.state.intervalId);
@@ -55,7 +55,7 @@ export default class Timer extends Component {
     event.preventDefault();
     if (counter !== 0 && !this.state.clockRunning) {
       API.saveUserData({
-        grading: this.state.time,
+        [this.props.category]: this.state.time,
         email: localStorage.getItem("email")
       })
         .then(
@@ -72,11 +72,9 @@ export default class Timer extends Component {
   };
 
   render() {
+    // console.log("Category Array", this.props.array);
     return (
       <div className="wrapper">
-        <div>
-          <button>grading</button>
-        </div>
         <div className="display">{this.state.converted}</div>
         <div className="buttons">
           <button onClick={this.startClock}>Start</button>
