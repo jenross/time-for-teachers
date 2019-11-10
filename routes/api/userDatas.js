@@ -5,6 +5,7 @@ router.route("/").post(userDatasController.createNewDocument);
 
 router.route("/:category").post(userDatasController.create);
 
+
 router.route("/:email").get(userDatasController.findAll);
 
 router.route("/create/:email").post(userDatasController.createNewDocument);
