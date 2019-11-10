@@ -4,7 +4,7 @@ import Timer from "./Timer";
 import Add from "./images/ic_add_circle_48px.svg";
 
 export default function CategoryRow(props) {
-  console.log(`the sum for  ${props.category}`, props.getSum);
+  //   console.log(`the sum for  ${props.category}`, props.getSum);
   return (
     <tr>
       <td className="text-center">

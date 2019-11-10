@@ -17,9 +17,9 @@ class AuthNavbar extends Component {
       console.log(error.message);
     }
   };
-  
+
   render() {
-    console.log("the props", this.props);
+    // console.log("the props", this.props);
     return (
       <Navbar className="navbar-absolute navbar-transparent" expand="lg">
         <NavbarBrand to="/" tag={Link} id="navbar-brand">
