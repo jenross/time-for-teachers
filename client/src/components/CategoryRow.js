@@ -2,6 +2,7 @@ import React from "react";
 import { FormGroup, Label, Input } from "reactstrap";
 import Timer from "./Timer";
 import Add from "./images/ic_add_circle_48px.svg";
+import moment from "moment";
 
 export default function CategoryRow(props) {
   //   console.log(`the sum for  ${props.category}`, props.getSum);
@@ -23,7 +24,7 @@ export default function CategoryRow(props) {
         />
       </td>
       <td>{props.name}</td>
-      <td>{props.getSum}</td>
+      <td>{moment.utc(props.getSum * 1000).format("HH:mm:ss")}</td>
       <td>
         <FormGroup>
           <Input

@@ -3,6 +3,7 @@ import API from "./utility/API";
 import CategoryRow from "./CategoryRow";
 import "./Dashboard.css";
 import PanelHeader from "./PanelHeader";
+import moment from "moment";
 import {
   Card,
   CardBody,
@@ -30,7 +31,10 @@ export default class Dashboard extends Component {
       },
       { name: "Other", category: "other" }
     ],
-    userData: []
+    userData: [],
+    postDates: [],
+    today: moment().format("dddd"),
+    todayDate: moment().format("dddd")
   };
 
   //? ==============================================================//
@@ -53,8 +57,20 @@ export default class Dashboard extends Component {
             .catch(err => console.log(err));
         }
         console.log(res.data[0].time);
+        console.log(res.data[0].time[0].date.slice(0, 10));
+        // console.log(
+        //   "THE RES DATE IS",
+        // res.data[0].time.filter(
+        //   data => data.date.slice(0, 10) === this.state.todayDate
+        // );
+        // );
+        console.log(
+          " THIS IS WHAT IM TESTING AGAINST ",
+          moment().format("YYYY-MM-DD")
+        );
         this.setState({
-          userData: res.data[0].time
+          userData: res.data[0].time,
+          postDates: res.data[0].date
         });
       })
       .catch(err => console.log(err));
@@ -63,6 +79,7 @@ export default class Dashboard extends Component {
   render() {
     // console.log("This here, is the UserData", this.state.userData);
     // console.log("get sum", this.getGradingSum());
+    console.log("THE DAY TODAY IS", moment().format("dddd"));
     return (
       <React.Fragment>
         <>
@@ -79,6 +96,7 @@ export default class Dashboard extends Component {
                 ></Card>
               </Col>
               <Col xs={12} md={12}>
+                <CardTitle tag="h4">{moment().format("LTS")}</CardTitle>
                 <CardTitle tag="h4">Tasks</CardTitle>
                 <Card className="card-plain">
                   <CardHeader></CardHeader>
