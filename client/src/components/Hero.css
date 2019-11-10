@@ -1,11 +1,30 @@
-/* .hero-img {
-    max-width: 400px;
-    max-height: 400px; 
-} */
-
 .hero-container {
     background-size: cover;
     background-position: top;
-    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 }
 
+.hero-subtext {
+    font-size: 24px; 
+}
+
+@media only screen and (max-width: 940px) {
+    .hero-text {
+        margin-top: 100px; 
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .hero-header {
+        font-size: 50px; 
+    }
+    .hero-subtext {
+        font-size: 22px; 
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .hero-header {
+        font-size: 60px; 
+    }
+    
+}

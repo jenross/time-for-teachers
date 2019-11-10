@@ -57,13 +57,21 @@
 } */
 
 #register-btn {
-    background-color: #EA543A!important; 
+    background-color: #E73A2E!important; 
 }
 
 #login-btn {
-    color: #EA543A!important; 
+    color: #E73A2E!important; 
 }
 
 #navbar-brand {
-    color: black;
+    color: #F0F3F5;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 20px; 
 }
+
+/* @media only screen and (max-width: 600px) {
+    #navbar-brand {
+        margin-top: -20px!important;   
+    } 
+} */
