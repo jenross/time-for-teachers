@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "server.js",
-  "proxy": "time-for-teachers-dev.us-east-1.elasticbeanstalk.com",
+  "proxy": "http://time-for-teachers-dev.us-east-1.elasticbeanstalk.com",
   "homepage": "https://timeforteachers.us",
   "dependencies": {
     "aws-amplify": "^1.2.4",
