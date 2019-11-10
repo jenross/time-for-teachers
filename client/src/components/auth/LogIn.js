@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
 import "./forms.css";
+import API from "../utility/API";
 
 class LogIn extends Component {
   state = {
@@ -14,6 +15,14 @@ class LogIn extends Component {
       blankfield: false
     }
   };
+
+  //? ========================== //
+  // checkForUserDataDoc = () => {
+  //   API.findDocument(localStorage.getItem("email")).then(res =>
+  //     console.log(res.data)
+  //   );
+  // };
+  //? ========================== //
 
   clearErrorState = () => {
     this.setState({
