@@ -1,6 +1,10 @@
 import React from 'react';
 import Hero from './Hero';
 import Select from "react-select";
+import './Home.css';
+import watch from './images/ic_watch_later_48px.svg';
+import graph from './images/ic_insert_chart_48px.svg';
+import send from './images/send-2.svg';
 // reactstrap components
 import {
   Badge,
@@ -51,10 +55,10 @@ function Home() {
             <div className="features-3">
               <Container>
                 <Row>
-                  <Col className="mr-auto ml-auto" md="8">
+                  <Col className="how-it-works mr-auto ml-auto" md="8">
                     <h2 className="title">How it Works</h2>
                     <h4 className="description">
-                    Time for Teachers (T4T) helps school districts track the time teachers are spending on required tasks and measures it against how much planning time they actually get.
+                    <span className="italic">Time for Teachers</span> helps school districts track the time teachers are spending on required tasks and measures it against how much planning time they actually get.
                     </h4>
                   </Col>
                 </Row>
@@ -62,36 +66,33 @@ function Home() {
                   <Col md="4">
                     <div className="info info-hover">
                       <div className="icon icon-success icon-circle">
-                        <i className="now-ui-icons objects_globe"></i>
+                        <img className="img-icon" src={watch} alt="watch icon" />
                       </div>
-                      <h4 className="info-title">Asset Management</h4>
+                      <h4 className="info-title">Time Tracking</h4>
                       <p className="description">
-                        Cross-account dashboards provide sophisticated reporting
-                        for enterprise.
+                        Use the timer to track required tasks and planning time. 
                       </p>
                     </div>
                   </Col>
                   <Col md="4">
                     <div className="info info-hover">
                       <div className="icon icon-info icon-circle">
-                        <i className="now-ui-icons education_atom"></i>
+                        <img className="img-icon" src={graph} alt="graph icon" />
                       </div>
-                      <h4 className="info-title">Resource Utilization</h4>
+                      <h4 className="info-title">Report Generation</h4>
                       <p className="description">
-                        CloudCheckr provides summary and detailed usage
-                        statistics for resources.
+                        Beautiful charts are automatically generated to show teachers' personal time, as well as the consolidated district averages.
                       </p>
                     </div>
                   </Col>
                   <Col md="4">
                     <div className="info info-hover">
                       <div className="icon icon-primary icon-circle">
-                        <i className="now-ui-icons tech_watch-time"></i>
+                        <img className="img-icon" src={send} alt="send icon" />
                       </div>
-                      <h4 className="info-title">Self-Healing</h4>
+                      <h4 className="info-title">Automatic Distribution</h4>
                       <p className="description">
-                        CloudCheckr enables users to save money, time, and
-                        effort.
+                        Your district's consolidated reports can be sent to state and local officials, as well as the press. 
                       </p>
                     </div>
                   </Col>

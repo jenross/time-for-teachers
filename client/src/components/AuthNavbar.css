@@ -66,8 +66,8 @@
 
 #navbar-brand {
     color: #F0F3F5;
-    font-family: 'Permanent Marker', cursive;
     font-size: 20px; 
+    font-style: italic; 
 }
 
 /* @media only screen and (max-width: 600px) {
