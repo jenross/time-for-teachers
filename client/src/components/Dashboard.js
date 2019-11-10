@@ -55,14 +55,14 @@ export default class Dashboard extends Component {
         console.log(res.data[0].time);
         this.setState({
           userData: res.data[0].time
- 
         });
       })
       .catch(err => console.log(err));
   }
 
   render() {
-
+    // console.log("This here, is the UserData", this.state.userData);
+    // console.log("get sum", this.getGradingSum());
     return (
       <React.Fragment>
         <>

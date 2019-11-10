@@ -72,7 +72,6 @@ export default class Timer extends Component {
   };
 
   render() {
-    // console.log("Category Array", this.props.array);
     return (
       <div className="wrapper">
         <div className="display">{this.state.converted}</div>

@@ -29,10 +29,7 @@ module.exports = {
   //   });
   // },
   create(req, res) {
-    // console.log("the body: ", req.body);
-    // console.log("the param: ", req.params.category);
     db.User.findOne({ email: req.body.email }).then(results => {
-      // console.log(results._id);
       db.UserData.findOneAndUpdate(
         { user: results._id },
         {
@@ -46,6 +43,7 @@ module.exports = {
         .catch(err => console.log(err));
     });
   },
+  
   //? Creates New Empty Document if User Doesn't Have Any UserData //
   createNewDocument(req, res) {
     console.log("\n===============I've been hit=================\n");
