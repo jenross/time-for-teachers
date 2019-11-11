@@ -42,7 +42,7 @@ export default class Timer extends Component {
       let intervalId = setInterval(this.count, 1000);
       this.setState({ clockRunning: true, intervalId: intervalId });
     }
-  };
+  };  
 
   stopClock = () => {
     console.log("stop");

@@ -10,25 +10,7 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     });
   },
-  // create: function(req, res) {
-  //   db.User.findOne({ email: req.body.email }).then(results => {
-  //     const newData = {
-  //       ...req.body,
-  //       user: results._id
-  //     };
-  //     db.UserData.create(newData)
-  //       .then(dbModel => {
-  //         return db.User.findOneAndUpdate(
-  //           { email: req.body.email, user: results._id },
-  //           { $push: { userdata: dbModel._id } },
-  //           { safe: true, upsert: true, new: true }
-  //         );
-  //       })
-  //       .then(dbModel => res.json(dbModel))
-  //       .catch(err => console.log(err));
-  //   });
-  // },
-  create(req, res) {
+  createNewTimeInput(req, res) {
     db.User.findOne({ email: req.body.email }).then(results => {
       db.UserData.findOneAndUpdate(
         { user: results._id },
@@ -43,7 +25,22 @@ module.exports = {
         .catch(err => console.log(err));
     });
   },
-  
+  createAccumulatedData(req, res) {
+    db.User.findOne({ email: req.params.email }).then(results => {
+      console.log("THE BODY", req.body);
+      db.UserData.findOneAndUpdate(
+        { user: results._id },
+        {
+          $push: { comparisonTime: req.body }
+        }
+      )
+        .then(dbModel => {
+          console.log("the dbModel", dbModel);
+          res.json(dbModel);
+        })
+        .catch(err => console.log(err));
+    });
+  },
   //? Creates New Empty Document if User Doesn't Have Any UserData //
   createNewDocument(req, res) {
     console.log("\n===============I've been hit=================\n");
@@ -53,6 +50,24 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     });
-
   }
 };
+
+// create: function(req, res) {
+//   db.User.findOne({ email: req.body.email }).then(results => {
+//     const newData = {
+//       ...req.body,
+//       user: results._id
+//     };
+//     db.UserData.create(newData)
+//       .then(dbModel => {
+//         return db.User.findOneAndUpdate(
+//           { email: req.body.email, user: results._id },
+//           { $push: { userdata: dbModel._id } },
+//           { safe: true, upsert: true, new: true }
+//         );
+//       })
+//       .then(dbModel => res.json(dbModel))
+//       .catch(err => console.log(err));
+//   });
+// },
