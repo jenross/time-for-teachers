@@ -3,6 +3,7 @@ import API from "./utility/API";
 import CategoryRow from "./CategoryRow";
 import "./Dashboard.css";
 import PanelHeader from "./PanelHeader";
+import moment from "moment";
 import {
   Card,
   CardBody,
@@ -10,8 +11,11 @@ import {
   CardTitle,
   Table,
   Row,
-  Col
+  Col,
+  Input
 } from "reactstrap";
+
+const allTimeArr = [];
 
 export default class Dashboard extends Component {
   state = {
@@ -30,21 +34,47 @@ export default class Dashboard extends Component {
       },
       { name: "Other", category: "other" }
     ],
-    userData: []
+    scheduledTime: 0,
+    userData: [],
+    userDataToday: [],
+    postDates: [],
+    today: moment().format("dddd"),
+    todayDate: moment().format("YYYY-MM-DD"),
+    allTime: []
   };
 
   //? ==============================================================//
 
   //? ==============================================================//
   getSum = category => {
-    console.log(category);
     return this.state.userData
       .filter(data => data[category])
       .map(data => parseInt(data[category]))
       .reduce((a, b) => a + b, 0);
   };
 
+  addAllTimeData = data => {
+    data.forEach(x => {
+      allTimeArr.push(
+        x.grading ||
+          x.lessonPlanning ||
+          x.specialEventPlanning ||
+          x.communications ||
+          x.paperwork ||
+          x.continuingEducation ||
+          x.other
+      );
+    });
+    this.setState({
+      allTime: allTimeArr.map(x => parseInt(x)).reduce((a, b) => a + b, 0)
+    });
+
+    console.log(this.state.allTime);
+    console.log(data);
+  };
+
   componentDidMount() {
+    //? ======== Checks to see if user has a document associated, Creats one if they don't ======== //
     API.checkUserData(localStorage.getItem("email"))
       .then(res => {
         if (res.data.length === 0) {
@@ -52,17 +82,47 @@ export default class Dashboard extends Component {
             .then(res)
             .catch(err => console.log(err));
         }
-        console.log(res.data[0].time);
+        //? ======== get acumulated time data for the user submit function ======== //
+        this.addAllTimeData(res.data[0].time);
+
+        // res.data[0].time.forEach(x => {
+        //   if (x.date.slice(0, 10) !== this.state.todayDate) {
+        //     this.setState({ userDataToday: res.data[0].time });
+        //   }
+        // });
+        // console.log("USER data TODAY", this.state.userDataToday);
+
+        // console.log(
+        //   " THIS IS WHAT IM TESTING AGAINST ",
+        //   moment().format("YYYY-MM-DD")
+        // );
+
         this.setState({
-          userData: res.data[0].time
+          userData: res.data[0].time,
+          postDates: res.data[0].date
         });
       })
       .catch(err => console.log(err));
   }
 
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  submitTime = () => {
+    API.createComparisonTime(localStorage.getItem("email"), {
+      scheduledTime: this.state.scheduledTime,
+      accumulatedTime: this.state.allTime
+    })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  };
+
   render() {
-    // console.log("This here, is the UserData", this.state.userData);
-    // console.log("get sum", this.getGradingSum());
+    console.log("THE DAY TODAY IS", moment().format("dddd"));
     return (
       <React.Fragment>
         <>
@@ -78,8 +138,43 @@ export default class Dashboard extends Component {
                   }}
                 ></Card>
               </Col>
-              <Col xs={12} md={12}>
-                <CardTitle tag="h4">Tasks</CardTitle>
+              <CardTitle tag="h4">{moment().format("LTS")}</CardTitle>
+              <CardTitle tag="h4">Tasks</CardTitle>{" "}
+            </Row>
+
+            <Row>
+              <Col xs={12} md={3}>
+                <div
+                  style={{
+                    margin: "50px auto 50px auto",
+                    padding: "100px",
+                    backgroundColor: "#ccc"
+                  }}
+                >
+                  <h3>Time Allotted</h3>
+                  <button onClick={this.submitTime}> BUTTON </button>
+                  <Input
+                    type="number  "
+                    name="scheduledTime"
+                    id="exampleNumber"
+                    placeholder="number placeholder"
+                    onChange={this.handleInputChange}
+                  />
+                  <h4 style={{ padding: "20px" }}>
+                    You recived:{" "}
+                    {moment
+                      .utc(this.state.scheduledTime * 1000)
+                      .format("HH:mm:ss")}{" "}
+                    Hours
+                  </h4>
+                  <h4 style={{ padding: "20px" }}>
+                    You've spent:{" "}
+                    {moment.utc(this.state.allTime * 1000).format("HH:mm:ss")}{" "}
+                    Hours
+                  </h4>
+                </div>
+              </Col>
+              <Col xs={12} md={9}>
                 <Card className="card-plain">
                   <CardHeader></CardHeader>
                   <CardBody>
