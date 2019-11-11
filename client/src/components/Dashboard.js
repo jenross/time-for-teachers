@@ -141,9 +141,43 @@ export default class Dashboard extends Component {
                   }}
                 ></Card>
               </Col>
-              <Col xs={12} md={12}>
-                <CardTitle tag="h4">{moment().format("LTS")}</CardTitle>
-                <CardTitle tag="h4">Tasks</CardTitle>
+              <CardTitle tag="h4">{moment().format("LTS")}</CardTitle>
+              <CardTitle tag="h4">Tasks</CardTitle>{" "}
+            </Row>
+
+            <Row>
+              <Col xs={3} md={3}>
+                <div
+                  style={{
+                    margin: "50px auto 50px auto",
+                    padding: "100px",
+                    backgroundColor: "#ccc"
+                  }}
+                >
+                  <h3>Time Allotted</h3>
+                  <button onClick={this.submitTime}> BUTTON </button>
+                  <Input
+                    type="number"
+                    name="scheduledTime"
+                    id="exampleNumber"
+                    placeholder="number placeholder"
+                    onChange={this.handleInputChange}
+                  />
+                  <h4 style={{ padding: "20px" }}>
+                    You recived:{" "}
+                    {moment
+                      .utc(this.state.scheduledTime * 1000)
+                      .format("HH:mm:ss")}{" "}
+                    Hours
+                  </h4>
+                  <h4 style={{ padding: "20px" }}>
+                    You've spent:{" "}
+                    {moment.utc(this.state.allTime * 1000).format("HH:mm:ss")}{" "}
+                    Hours
+                  </h4>
+                </div>
+              </Col>
+              <Col xs={12} md={9}>
                 <Card className="card-plain">
                   <CardHeader></CardHeader>
                   <CardBody>
@@ -158,23 +192,6 @@ export default class Dashboard extends Component {
                           />
                         ))}
                       </tbody>
-                      <div
-                        style={{
-                          margin: "50px auto 50px auto",
-                          padding: "100px",
-                          backgroundColor: "pink"
-                        }}
-                      >
-                        <h3>Time Alloted</h3>
-                        <button onClick={this.submitTime}> BUTTON </button>
-                        <Input
-                          type="number"
-                          name="scheduledTime"
-                          id="exampleNumber"
-                          placeholder="number placeholder"
-                          onChange={this.handleInputChange}
-                        />
-                      </div>
                     </Table>
                   </CardBody>
                 </Card>
