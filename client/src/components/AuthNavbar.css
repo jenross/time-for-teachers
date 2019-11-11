@@ -70,6 +70,11 @@
     font-style: italic; 
 }
 
+.logo {
+    height: 90px;
+    width: 250px; 
+}
+
 /* @media only screen and (max-width: 600px) {
     #navbar-brand {
         margin-top: -20px!important;   

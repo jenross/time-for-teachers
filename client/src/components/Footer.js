@@ -27,46 +27,41 @@ function Footer() {
             <ul>
               <li>
                 <a
-                  href="https://www.creative-tim.com?ref=nuk-pro-react-footer"
-                  target="_blank"
+                  href="#"
                 >
-                  Creative Tim
+                  About
                 </a>
               </li>
               <li>
                 <a
-                  href="http://presentation.creative-tim.com?ref=nuk-pro-react-footer"
-                  target="_blank"
+                  href="/register"
                 >
-                  About Us
+                  Register
                 </a>
               </li>
               <li>
                 <a
-                  href="http://blog.creative-tim.com?ref=nuk-pro-react-footer"
-                  target="_blank"
+                  href="/login"
                 >
-                  Blog
+                  Sign In
                 </a>
               </li>
             </ul>
           </nav>
           <div className="copyright" id="copyright">
-            © {new Date().getFullYear()}, Designed by{" "}
+            © {new Date().getFullYear()}, &nbsp;
             <a
-              href="https://www.invisionapp.com?ref=creativetim"
+              href="https://github.com/jenross"
               target="_blank"
             >
-              Invision
-            </a>
-            . Coded by{" "}
+              Jennifer Ross
+            </a> and &nbsp;
             <a
-              href="https://www.creative-tim.com?ref=nuk-pro-react-footer"
+              href="https://github.com/plake492"
               target="_blank"
             >
-              Creative Tim
+               Patrick Lake
             </a>
-            .
           </div>
         </Container>
       </footer>

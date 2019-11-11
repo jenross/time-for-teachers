@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import "./AuthNavbar.css";
 import { Button, NavbarBrand, Navbar, NavItem, Nav } from "reactstrap";
+import logo from './images/T4T1-02.png';
 
 class AuthNavbar extends Component {
   handleLogOut = async event => {
@@ -23,7 +24,7 @@ class AuthNavbar extends Component {
     return (
       <Navbar className="navbar-absolute navbar-transparent" expand="lg">
         <NavbarBrand to="/" tag={Link} id="navbar-brand">
-          Time for Teachers
+          <img className="logo" src={logo} alt="Time for Teachers logo" />
         </NavbarBrand>
         <Nav className="ml-auto" id="ceva" navbar>
           <NavItem>

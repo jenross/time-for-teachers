@@ -1,5 +1,5 @@
 import React from 'react';
-import './Hero.css'
+import './Hero.css';
 
 // export default function Hero() {
 //   return (
@@ -48,7 +48,7 @@ function Hero() {
             <Col className="hero-text" md="4" lg="4" sm="4">
               <h2 className="hero-header title">Track it. Report it. Prove it.</h2>
               <h4 className="hero-subtext">
-                Your time is valuable, and so are you.
+                <span className="italic">Your time is valuable, and so are you.</span>
               </h4> 
             </Col>
           </Row>
