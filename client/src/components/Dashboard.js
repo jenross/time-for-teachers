@@ -107,7 +107,6 @@ export default class Dashboard extends Component {
 
   handleInputChange = event => {
     const { name, value } = event.target;
-    // console.log("name", name, "Value", value);
     this.setState({
       [name]: value
     });
@@ -123,8 +122,6 @@ export default class Dashboard extends Component {
   };
 
   render() {
-    // console.log("This here, is the UserData", this.state.userData);
-    // console.log("get sum", this.getGradingSum());
     console.log("THE DAY TODAY IS", moment().format("dddd"));
     return (
       <React.Fragment>
@@ -146,7 +143,7 @@ export default class Dashboard extends Component {
             </Row>
 
             <Row>
-              <Col xs={3} md={3}>
+              <Col xs={12} md={3}>
                 <div
                   style={{
                     margin: "50px auto 50px auto",
@@ -157,7 +154,7 @@ export default class Dashboard extends Component {
                   <h3>Time Allotted</h3>
                   <button onClick={this.submitTime}> BUTTON </button>
                   <Input
-                    type="number"
+                    type="number  "
                     name="scheduledTime"
                     id="exampleNumber"
                     placeholder="number placeholder"

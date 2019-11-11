@@ -1,17 +1,15 @@
 import React from "react";
-import { FormGroup, Label, Input } from "reactstrap";
+import { FormGroup, Label } from "reactstrap";
 import Timer from "./Timer";
-import Add from "./images/ic_add_circle_48px.svg";
 import moment from "moment";
+import InputTime from "./InputTime";
 
 export default function CategoryRow(props) {
-  //   console.log(`the sum for  ${props.category}`, props.getSum);
   return (
     <tr>
       <td className="text-center">
         <FormGroup check>
           <Label check>
-            {/* <Input type="checkbox"></Input> */}
             <span className="form-check-sign"></span>
           </Label>
         </FormGroup>
@@ -25,21 +23,15 @@ export default function CategoryRow(props) {
       </td>
       <td>{props.name}</td>
       <td>{moment.utc(props.getSum * 1000).format("HH:mm:ss")}</td>
-      <td>
-        <FormGroup>
-          <Input
-            type="number"
-            name="number"
-            id="exampleNumber"
-            placeholder="number placeholder"
-          />
-        </FormGroup>
-      </td>
-      <td>
-        <button>
-          <img className="add-btn" src={Add} alt="add button" />
-        </button>
-      </td>
+      <FormGroup>
+        <InputTime
+          type="number"
+          name="userInput"
+          id="exampleNumber"
+          placeholder="input your time"
+          category={props.category}
+        />
+      </FormGroup>
     </tr>
   );
 }
