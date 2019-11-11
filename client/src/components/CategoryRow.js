@@ -11,7 +11,7 @@ export default function CategoryRow(props) {
       <td className="text-center">
         <FormGroup check>
           <Label check>
-            <Input type="checkbox"></Input>
+            {/* <Input type="checkbox"></Input> */}
             <span className="form-check-sign"></span>
           </Label>
         </FormGroup>

@@ -12,5 +12,9 @@ export default {
   },
   createDocument: function(email) {
     return axios.post(`/api/userdatas/create/${email}`);
+  },
+  createComparisonTime: function(email, userData) {
+    console.log(userData);
+    return axios.post(`/api/userdatas/createall/${email}`, userData);
   }
 };

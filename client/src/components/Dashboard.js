@@ -11,8 +11,11 @@ import {
   CardTitle,
   Table,
   Row,
-  Col
+  Col,
+  Input
 } from "reactstrap";
+
+const allTimeArr = [];
 
 export default class Dashboard extends Component {
   state = {
@@ -31,24 +34,47 @@ export default class Dashboard extends Component {
       },
       { name: "Other", category: "other" }
     ],
+    scheduledTime: 0,
     userData: [],
+    userDataToday: [],
     postDates: [],
     today: moment().format("dddd"),
-    todayDate: moment().format("dddd")
+    todayDate: moment().format("YYYY-MM-DD"),
+    allTime: []
   };
 
   //? ==============================================================//
 
   //? ==============================================================//
   getSum = category => {
-    console.log(category);
     return this.state.userData
       .filter(data => data[category])
       .map(data => parseInt(data[category]))
       .reduce((a, b) => a + b, 0);
   };
 
+  addAllTimeData = data => {
+    data.forEach(x => {
+      allTimeArr.push(
+        x.grading ||
+          x.lessonPlanning ||
+          x.specialEventPlanning ||
+          x.communications ||
+          x.paperwork ||
+          x.continuingEducation ||
+          x.other
+      );
+    });
+    this.setState({
+      allTime: allTimeArr.map(x => parseInt(x)).reduce((a, b) => a + b, 0)
+    });
+
+    console.log(this.state.allTime);
+    console.log(data);
+  };
+
   componentDidMount() {
+    //? ======== Checks to see if user has a document associated, Creats one if they don't ======== //
     API.checkUserData(localStorage.getItem("email"))
       .then(res => {
         if (res.data.length === 0) {
@@ -56,18 +82,21 @@ export default class Dashboard extends Component {
             .then(res)
             .catch(err => console.log(err));
         }
-        console.log(res.data[0].time);
-        console.log(res.data[0].time[0].date.slice(0, 10));
+        //? ======== get acumulated time data for the user submit function ======== //
+        this.addAllTimeData(res.data[0].time);
+
+        // res.data[0].time.forEach(x => {
+        //   if (x.date.slice(0, 10) !== this.state.todayDate) {
+        //     this.setState({ userDataToday: res.data[0].time });
+        //   }
+        // });
+        // console.log("USER data TODAY", this.state.userDataToday);
+
         // console.log(
-        //   "THE RES DATE IS",
-        // res.data[0].time.filter(
-        //   data => data.date.slice(0, 10) === this.state.todayDate
+        //   " THIS IS WHAT IM TESTING AGAINST ",
+        //   moment().format("YYYY-MM-DD")
         // );
-        // );
-        console.log(
-          " THIS IS WHAT IM TESTING AGAINST ",
-          moment().format("YYYY-MM-DD")
-        );
+
         this.setState({
           userData: res.data[0].time,
           postDates: res.data[0].date
@@ -75,6 +104,23 @@ export default class Dashboard extends Component {
       })
       .catch(err => console.log(err));
   }
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    // console.log("name", name, "Value", value);
+    this.setState({
+      [name]: value
+    });
+  };
+
+  submitTime = () => {
+    API.createComparisonTime(localStorage.getItem("email"), {
+      scheduledTime: this.state.scheduledTime,
+      accumulatedTime: this.state.allTime
+    })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  };
 
   render() {
     // console.log("This here, is the UserData", this.state.userData);
@@ -112,6 +158,23 @@ export default class Dashboard extends Component {
                           />
                         ))}
                       </tbody>
+                      <div
+                        style={{
+                          margin: "50px auto 50px auto",
+                          padding: "100px",
+                          backgroundColor: "pink"
+                        }}
+                      >
+                        <h3>Time Alloted</h3>
+                        <button onClick={this.submitTime}> BUTTON </button>
+                        <Input
+                          type="number"
+                          name="scheduledTime"
+                          id="exampleNumber"
+                          placeholder="number placeholder"
+                          onChange={this.handleInputChange}
+                        />
+                      </div>
                     </Table>
                   </CardBody>
                 </Card>
