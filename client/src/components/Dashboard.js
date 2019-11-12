@@ -144,6 +144,7 @@ export default class Dashboard extends Component {
                 <Col md="6">
                   {/* get this to keep running without page refresh */}
                   <h2>{moment().format('MMMM Do YYYY, h:mm:ss a')}</h2>
+                  <button href="/reports">See my reports</button>
                 </Col>
               </Row>
             

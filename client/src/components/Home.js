@@ -48,7 +48,7 @@ function Home() {
               <Container className="how-it-works-container">
                 <Row>
                   <Col className="how-it-works mr-auto ml-auto" md="8">
-                    <h2 className="title">How it Works</h2>
+                    <h2 className="section-title">How it Works</h2>
                     <h4 className="description">
                     <span className="italic">Time for Teachers</span> helps school districts track the time teachers are spending on required tasks and measures it against how much planning time they actually get.
                     </h4>
@@ -99,7 +99,7 @@ function Home() {
             <Container>
               <Row>
                 <Col className="mr-auto ml-auto" md="8">
-                  <h2 className="text-center title">Any questions?</h2>
+                  <h2 className="text-center section-title">Any questions?</h2>
                   <h4 className="text-center description">
                     We'll get back to you as quickly as possible. We know how valuable your time is.
                   </h4>

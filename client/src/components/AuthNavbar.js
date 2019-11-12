@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import "./AuthNavbar.css";
 import { Button, NavbarBrand, Navbar, NavItem, Nav } from "reactstrap";
-import logo from './images/T4T1-02.png';
+import logo from './images/t4t-logo.png'; 
 
 class AuthNavbar extends Component {
   handleLogOut = async event => {

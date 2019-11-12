@@ -18,6 +18,7 @@ import Welcome from "./components/auth/Welcome";
 import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./components/Footer";
 import Dashboard from "./components/Dashboard";
+import Reports from './components/Reports';
 import { Auth } from "aws-amplify";
 
 // styles
@@ -116,6 +117,7 @@ class App extends Component {
               render={props => <Welcome {...props} auth={authProps} />}
             />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/reports" component={Reports} />
           </Switch>
           <Footer />
         </Router>
