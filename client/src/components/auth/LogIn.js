@@ -5,6 +5,27 @@ import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
 import "./forms.css";
 import API from "../utility/API";
+import email from '../images/email-84.svg';
+import password from '../images/lock-open.svg';
+
+// reactstrap components
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardTitle,
+  Label,
+  FormGroup,
+  Form,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Container,
+  Row,
+  Col
+} from "reactstrap";
 
 class LogIn extends Component {
   state = {
@@ -77,10 +98,75 @@ class LogIn extends Component {
       return <Redirect to="/dashboard" />;
     }
     return (
-      <React.Fragment>
-        <section className="section auth">
+      <div>
+        <section className="section auth form-page">
+          {/* <Row>
+          <Col className="mx-auto" md="6" lg="4">
+                <Card className="card-signup">
+                  <CardBody>
+                    <CardTitle className="text-center form-title" tag="h4">
+                      Sign In
+                    </CardTitle>
+                    <FormErrors formerrors={this.state.errors} />
+                    <Form action="" className="form" method="" onSubmit={this.handleSubmit}>
+                      <InputGroup>
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText className="input-section">
+                            <img className="form-icon" src={email} alt="email icon" />
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input
+                        id="username"
+                        aria-describedby="usernameHelp"
+                        autoComplete="email"
+                        placeholder="Email or Username"
+                        type="text"
+                        value={this.state.username}
+                        onChange={this.onInputChange}
+                        ></Input>
+                      </InputGroup>
+                      <InputGroup>
+                        <InputGroupAddon className="input-prepend-section" addonType="prepend">
+                          <InputGroupText className="input-section">
+                            <img className="form-icon" src={password} alt="password icon" />
+                          </InputGroupText>
+                        
+                        </InputGroupAddon>
+                        <Input
+                          type="password"
+                          id="password"
+                          placeholder="Password"
+                          type="text"
+                          value={this.state.password}
+                          onChange={this.onInputChange}
+                        ></Input>
+                      </InputGroup>
+                      <div className="form-bottom">
+                        <p className="control">
+                          <a className="forgot-link" href="/forgotpassword">
+                            Forgot password?
+                          </a>
+                        </p>
+                      </div>
+                      <CardFooter className="text-center">
+                        <Button
+                          className="btn-round"
+                          href="/dashboard"
+                          onClick={e => e.preventDefault()}
+                          size="lg"
+                          // onSubmit={this.handleSubmit}
+                        >
+                          Get Started
+                        </Button>
+                      </CardFooter>
+                    </Form>
+                  </CardBody>
+                </Card>
+              </Col>
+          </Row> */}
           <div className="form-container">
-            <h1 className="form-header">Log in</h1>
+          <Card className="card-signup">
+            <h1 className="form-header">Sign In</h1>
             <FormErrors formerrors={this.state.errors} />
 
             <form onSubmit={this.handleSubmit}>
@@ -122,14 +208,15 @@ class LogIn extends Component {
               <div className="field">
                 <p className="control">
                   <button className="submit-btn is-success" href="/dashboard">
-                    Login
+                    Get started
                   </button>
                 </p>
               </div>
             </form>
+            </Card>
           </div>
         </section>
-      </React.Fragment>
+      </div>
     );
   }
 }

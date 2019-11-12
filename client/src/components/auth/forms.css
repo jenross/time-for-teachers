@@ -1,7 +1,8 @@
 .form-header {
-    color: #134450;
+    color: #E73A2E;
     text-align: center; 
     margin-bottom: 20px; 
+    font-size: 35px; 
 }
 
 .directions {
@@ -17,23 +18,30 @@
 }
 
 .input {
-    width: 500px;  
+    width: 400px;  
     font-size: 12px; 
     padding: 10px;
-    outline: none;  
-    margin: 12px;
+    outline: none; 
+}
+
+#password, #confirmpassword, #email {
+    margin-left: 22px; 
+}
+
+.fa-lock, .fa-envelope {
+    padding: 5px; 
 }
 
 .input:focus {
-    border: 2px solid #134450;
+    border: 2px solid #439da1
 }
 
 .submit-btn {
-    background-color: #134450;
+    background-color: #E73A2E;
     cursor: pointer; 
     text-align: center; 
     font-size: 16px; 
-    width: 110px; 
+    width: 150px; 
     padding: 10px; 
     border-radius: 20px; 
     margin: 0 auto;
@@ -41,20 +49,44 @@
 }
 
 .submit-btn:hover {
-    background-color: #F04B3D; 
+    background-color: #E73A2E; 
 }
 
 .forgot-link {
     text-decoration: none; 
-    color: #F04B3D; 
+    color: #E73A2E; 
 }
 
 .forgot-link:hover {
-    color: #134450;
+    color: #439da1
 }
 
 .form-bottom {
     margin: 20px; 
+}
+
+.form-page {
+    background-color: #439da1!important; 
+}
+
+.form-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.card-signup {
+    margin-top: 150px!important; 
+    max-width: 550px!important;
+    padding: 50px; 
+}
+
+.form-title {
+    font-size: 30px; 
+    margin-bottom: 40px!important; 
+}
+
+.input-prepend-section:focus {
+    border: 1px solid red!important; 
 }
 
 @media only screen and (max-width: 600px) {
