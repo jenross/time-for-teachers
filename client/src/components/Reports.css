@@ -7,13 +7,16 @@
 }
 
 .chart-row {
-    margin-top: 150px; 
+    margin-top: 190px; 
 }
 
 .left {
-    margin-right: 30px; 
+    margin-right: 40px; 
+    margin-left: 160px; 
 }
 
 .second {
-    margin-top: 75px; 
+    margin-top: 75px;
+    margin-bottom: 20px;  
 }
+

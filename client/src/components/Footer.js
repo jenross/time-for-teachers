@@ -21,7 +21,7 @@ import { Container } from "reactstrap";
 function Footer() {
   return (
     <>
-      <footer className="footer">
+      <footer className="footer footer-default">
         <Container>
           <nav>
             <ul>

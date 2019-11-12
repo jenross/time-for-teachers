@@ -60,4 +60,9 @@
 .card-profile {
     margin-left: 50px; 
     background-color: #D6D1B1!important;
+    margin-top: 10px!important; 
+}
+
+.table-body {
+    border: 1px solid white; 
 }

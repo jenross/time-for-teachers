@@ -3,11 +3,12 @@ import { FormGroup, Label } from "reactstrap";
 import Timer from "./Timer";
 import moment from "moment";
 import InputTime from "./InputTime";
+import './CategoryRow.css'; 
 
 export default function CategoryRow(props) {
   return (
-    <tr>
-      <td>
+    <tr className="table-row">
+      <td className="first-timer-section">
         <Timer
           category={props.category}
           array={props.array}

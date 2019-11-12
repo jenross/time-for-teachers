@@ -27,7 +27,7 @@ export default class InputTime extends Component {
 
   render() {
     return (
-      <div>
+      <div className="time-input-container">
         <td>
           <Input onChange={this.handleInputChange} {...this.props} />
         </td>

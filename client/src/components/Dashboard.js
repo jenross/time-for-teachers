@@ -4,6 +4,7 @@ import CategoryRow from "./CategoryRow";
 import "./Dashboard.css";
 import {Link} from 'react-router-dom';
 import moment from "moment";
+import { Auth } from 'aws-amplify';
 import {
   Button,
   Card,
@@ -150,7 +151,11 @@ export default class Dashboard extends Component {
           <Navbar className="secondary-nav" expand="lg">
               <Container>
                 <NavbarBrand className="secondary-nav-text">
-                    Hello, user!
+                
+                <p>
+                  Hello, user!
+                </p>
+              
                 </NavbarBrand>
                 <NavbarBrand className="mx-auto secondary-nav-text">
                   {moment().format('MMMM Do YYYY, h:mm:ss a')}
@@ -209,7 +214,7 @@ export default class Dashboard extends Component {
                 <Card className="card-profile">
                   <CardBody>
                     <Table responsive striped>
-                        <tbody>
+                        <tbody className="table-body">
                           {this.state.categories.map(x => (
                             <CategoryRow
                               getSum={this.getSum(x.category)}
