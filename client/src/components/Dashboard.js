@@ -147,7 +147,7 @@ export default class Dashboard extends Component {
   render() {
     // console.log("THE DAY TODAY IS", moment().format("dddd"));
     return (
-        <div className="content header-filter" filter-color="black">
+        <div className="content header-filter">
           <Navbar className="secondary-nav" expand="lg">
               <Container>
                 <NavbarBrand className="secondary-nav-text">

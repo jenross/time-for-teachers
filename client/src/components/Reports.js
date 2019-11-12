@@ -15,7 +15,7 @@ import {
 export default class Reports extends Component {
     render() {
         return (
-            <div className="header-filter" filter-color="black">
+            <div className="header-filter">
                 <div className="reports-container">
                     <Row className="chart-row">
                     

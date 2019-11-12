@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
-import './forms.css'
+import "./forms.css";
+import {
+  Card
+} from "reactstrap";
 
 class Register extends Component {
   state = {
@@ -15,7 +18,7 @@ class Register extends Component {
       blankfield: false,
       passwordmatch: false
     }
-  }
+  };
 
   clearErrorState = () => {
     this.setState({
@@ -25,7 +28,7 @@ class Register extends Component {
         passwordmatch: false
       }
     });
-  }
+  };
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -53,7 +56,7 @@ class Register extends Component {
       console.log(signUpResponse);
     } catch (error) {
       let err = null;
-      !error.message ? err = { "message": error } : err = error;
+      !error.message ? (err = { message: error }) : (err = error);
       this.setState({
         errors: {
           ...this.state.errors,
@@ -61,29 +64,29 @@ class Register extends Component {
         }
       });
     }
-  }
+  };
 
   onInputChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
     document.getElementById(event.target.id).classList.remove("is-danger");
-  }
+  };
 
   render() {
     return (
       <React.Fragment>
-      
-        <section className="section auth">
+        <section className="section auth form-page">
           <div className="form-container">
+          <Card className="card-signup">
             <h1 className="form-header">Register</h1>
             <FormErrors formerrors={this.state.errors} />
 
             <form onSubmit={this.handleSubmit}>
               <div className="field">
                 <p className="control">
-                  <input 
-                    className="input" 
+                  <input
+                    className="input"
                     type="text"
                     id="username"
                     aria-describedby="userNameHelp"
@@ -95,8 +98,8 @@ class Register extends Component {
               </div>
               <div className="field">
                 <p className="control has-icons-left has-icons-right">
-                  <input 
-                    className="input" 
+                  <input
+                    className="input"
                     type="email"
                     id="email"
                     aria-describedby="emailHelp"
@@ -111,8 +114,8 @@ class Register extends Component {
               </div>
               <div className="field">
                 <p className="control has-icons-left">
-                  <input 
-                    className="input" 
+                  <input
+                    className="input"
                     type="password"
                     id="password"
                     placeholder="Password"
@@ -126,8 +129,8 @@ class Register extends Component {
               </div>
               <div className="field">
                 <p className="control has-icons-left">
-                  <input 
-                    className="input" 
+                  <input
+                    className="input"
                     type="password"
                     id="confirmpassword"
                     placeholder="Confirm password"
@@ -141,17 +144,18 @@ class Register extends Component {
               </div>
               <div className="form-bottom">
                 <p className="control">
-                  <a className="forgot-link" href="/forgotpassword">Forgot password?</a>
+                  <a className="forgot-link" href="/forgotpassword">
+                    Forgot password?
+                  </a>
                 </p>
               </div>
               <div className="field">
                 <p className="control">
-                  <button className="submit-btn is-success">
-                    Register
-                  </button>
+                  <button className="submit-btn is-success">Register</button>
                 </p>
               </div>
             </form>
+            </Card>
           </div>
         </section>
       </React.Fragment>
