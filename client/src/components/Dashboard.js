@@ -2,18 +2,40 @@ import React, { Component } from "react";
 import API from "./utility/API";
 import CategoryRow from "./CategoryRow";
 import "./Dashboard.css";
-import PanelHeader from "./PanelHeader";
+import {Link} from 'react-router-dom';
 import moment from "moment";
 import {
+  Button,
   Card,
   CardBody,
-  CardHeader,
-  CardTitle,
+  CardHeader, 
   Table,
+  CardFooter,
+  CardTitle,
+  Label,
+  FormGroup,
+  Form,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Container,
+  Alert, 
   Row,
   Col,
-  Input
+  Navbar, 
+  NavbarBrand,
+  NavLink,
+  NavItem,
+  Nav
 } from "reactstrap";
+import plus from './images/ic_add_circle_48px.svg';
+import play from './images/ic_play_circle_filled_white_48px.svg';
+import stop from './images/ic_stop_48px.svg';
+import background from './images/pencils_yellow.png';
+import plan from './images/calendar-60.svg';
+import clock from './images/ic_timer_48px.svg';
+import charts from './images/ic_insert_chart_48px.svg';
 
 const allTimeArr = [];
 
@@ -115,290 +137,97 @@ export default class Dashboard extends Component {
   submitTime = () => {
     API.createComparisonTime(localStorage.getItem("email"), {
       scheduledTime: this.state.scheduledTime,
-      accumulatedTime: this.state.allTime
+      accumulatedTime: moment.utc(this.state.allTime * 1000).format("HH:mm")
     })
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
   };
 
   render() {
-    console.log("THE DAY TODAY IS", moment().format("dddd"));
+    // console.log("THE DAY TODAY IS", moment().format("dddd"));
     return (
-      <React.Fragment>
-        <>
-          <PanelHeader size="sm" />
-          <div className="content">
-            <Row>
-              <Col md="4">
-                <Card
-                  className="card-pricing card-raised"
-                  style={{
-                    backgroundImage:
-                      "url(" + require("./images/pencil_bkgrnd.png") + ")"
-                  }}
-                ></Card>
-              </Col>
-              <CardTitle tag="h4">{moment().format("LTS")}</CardTitle>
-              <CardTitle tag="h4">Tasks</CardTitle>{" "}
-            </Row>
+        <div className="content header-filter" filter-color="black">
+          <Navbar className="secondary-nav" expand="lg">
+              <Container>
+                <NavbarBrand className="secondary-nav-text">
+                    Hello, user!
+                </NavbarBrand>
+                <NavbarBrand className="mx-auto secondary-nav-text">
+                  {moment().format('MMMM Do YYYY, h:mm:ss a')}
+                </NavbarBrand>
+               
+                  <Nav navbar>
+                    <NavItem>
+                      <NavLink href="/reports" onClick={e => e.preventDefault()}>
+                      <Link to='/reports'>
+                        <img className="chart-icon" src={charts} alt="charts icon" />
+                          <p className="secondary-nav-text">Reports</p>
+                        </Link>
+                      </NavLink>
+                    </NavItem>
+                  </Nav>
+              </Container>
+            </Navbar>
 
             <Row>
-              <Col xs={12} md={3}>
-                <div
-                  style={{
-                    margin: "50px auto 50px auto",
-                    padding: "100px",
-                    backgroundColor: "#ccc"
-                  }}
-                >
-                  <h3>Time Allotted</h3>
-                  <button onClick={this.submitTime}> BUTTON </button>
-                  <Input
-                    type="number  "
-                    name="scheduledTime"
-                    id="exampleNumber"
-                    placeholder="number placeholder"
-                    onChange={this.handleInputChange}
-                  />
-                  <h4 style={{ padding: "20px" }}>
+              <Col lg="3" md="6" sm="12">
+                <Card className="card-pricing">
+                  <CardBody>
+                    <h6 className="category category-title">Planning Time Allotted</h6>
+                    <div className="icon icon-info">
+                      <img className="planning-icon" src={plan} alt="planning calendar icon" />
+                    </div>
+                    <p className="card-description planning-description">
+                      Not including required meetings, picking up/dropping off your class, and going to the bathroom.
+                    </p>
+                    <Input
+                        onChange={this.handleInputChange}
+                        id="exampleNumber"
+                        placeholder="time hh:mm"
+                        type="text"
+                      ></Input>
+                    <img id="plus-btn-planning" onClick={this.submitTime} src={plus} alt="plus icon" />
+                    <p className="card-description planning-description">
                     You recived:{" "}
                     {moment
                       .utc(this.state.scheduledTime * 1000)
                       .format("HH:mm:ss")}{" "}
-                    Hours
-                  </h4>
-                  <h4 style={{ padding: "20px" }}>
-                    You've spent:{" "}
-                    {moment.utc(this.state.allTime * 1000).format("HH:mm:ss")}{" "}
-                    Hours
-                  </h4>
-                </div>
+                    hours/minutes/seconds of planning time today.
+                    </p>
+                    <div className="icon icon-info">
+                      <img className="clock-icon" src={clock} alt="stopwatch icon" />
+                    </div>
+                    <p className="card-description planning-description">
+                    You've spent{" "}
+                    {moment.utc(this.state.allTime * 1000).format("HH")}{" "}
+                    hours and {moment.utc(this.state.allTime * 1000).format("mm")} minutes on required tasks today.
+                    </p>
+                  </CardBody>
+                </Card>
               </Col>
-              <Col xs={12} md={9}>
-                <Card className="card-plain">
-                  <CardHeader></CardHeader>
+               <Col lg="8" md="6" sm="12">
+                <Card className="card-profile">
                   <CardBody>
                     <Table responsive striped>
-                      <tbody>
-                        {this.state.categories.map(x => (
-                          <CategoryRow
-                            getSum={this.getSum(x.category)}
-                            category={x.category}
-                            name={x.name}
-                            array={x}
-                          />
-                        ))}
-                      </tbody>
-                    </Table>
+                        <tbody>
+                          {this.state.categories.map(x => (
+                            <CategoryRow
+                              getSum={this.getSum(x.category)}
+                              category={x.category}
+                              name={x.name}
+                              array={x}
+                            />
+                          ))}
+                        </tbody>
+                      </Table>
                   </CardBody>
                 </Card>
               </Col>
             </Row>
-          </div>
-        </>
-      </React.Fragment>
+          
+        </div>
+      
     );
   }
 }
 
-/* <tr>
-                          <td className="text-center">
-                            <FormGroup check>
-                              <Label check>
-                                <Input type="checkbox"></Input>
-                                <span className="form-check-sign"></span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <Timer />
-                          <td>Grading</td>
-                          <div>{this.getGradingSum()}</div>
-                          <div>
-                            {this.state.userData.map( => (
-                              <div>{grading}</div>
-                            ))}
-                          </div>
-
-                          <td>
-                            <FormGroup>
-                              <Input
-                                defaultValue=""
-                                placeholder="Time (hh:mm)"
-                                type="time"
-                              ></Input>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <img
-                              className="add-btn"
-                              src={Add}
-                              alt="add button"
-                            />
-                          </td>
-                        </tr> */
-/* <tr>
-                          <td className="text-center">
-                            <FormGroup check>
-                              <Label check>
-                                <Input type="checkbox"></Input>
-                                <span className="form-check-sign"></span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>Lesson Planning</td>
-                          <td>
-                            <FormGroup>
-                              <Input
-                                defaultValue=""
-                                placeholder="Time (hh:mm)"
-                                type="text"
-                              ></Input>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <img
-                              className="add-btn"
-                              src={Add}
-                              alt="add button"
-                            />
-                          </td>
-                        </tr> */
-
-/* <tr>
-                          <td className="text-center">
-                            <FormGroup check>
-                              <Label check>
-                                <Input type="checkbox"></Input>
-                                <span className="form-check-sign"></span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>Planning & Organizing Special Events</td>
-                          <td>
-                            <FormGroup>
-                              <Input
-                                defaultValue=""
-                                placeholder="Time (hh:mm)"
-                                type="text"
-                              ></Input>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <img
-                              className="add-btn"
-                              src={Add}
-                              alt="add button"
-                            />
-                          </td>
-                        </tr> */
-
-/* <tr>
-                          <td className="text-center">
-                            <FormGroup check>
-                              <Label check>
-                                <Input type="checkbox"></Input>
-                                <span className="form-check-sign"></span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>Communication</td>
-                          <td>
-                            <FormGroup>
-                              <Input
-                                defaultValue=""
-                                placeholder="Time (hh:mm)"
-                                type="text"
-                              ></Input>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <img
-                              className="add-btn"
-                              src={Add}
-                              alt="add button"
-                            />
-                          </td>
-                        </tr> */
-
-/* <tr>
-                          <td className="text-center">
-                            <FormGroup check>
-                              <Label check>
-                                <Input type="checkbox"></Input>
-                                <span className="form-check-sign"></span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>Legal Documentation & Paperwork</td>
-                          <td>
-                            <FormGroup>
-                              <Input
-                                defaultValue=""
-                                placeholder="Time (hh:mm)"
-                                type="text"
-                              ></Input>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <img
-                              className="add-btn"
-                              src={Add}
-                              alt="add button"
-                            />
-                          </td>
-                        </tr> */
-
-/* <tr>
-                          <td className="text-center">
-                            <FormGroup check>
-                              <Label check>
-                                <Input type="checkbox"></Input>
-                                <span className="form-check-sign"></span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>Mandatory Trainings & Continuing Education</td>
-                          <td>
-                            <FormGroup>
-                              <Input
-                                defaultValue=""
-                                placeholder="Time (hh:mm)"
-                                type="text"
-                              ></Input>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <img
-                              className="add-btn"
-                              src={Add}
-                              alt="add button"
-                            />
-                          </td>
-                        </tr> */
-/* <tr>
-                          <td className="text-center">
-                            <FormGroup check>
-                              <Label check>
-                                <Input type="checkbox"></Input>
-                                <span className="form-check-sign"></span>
-                              </Label>
-                            </FormGroup>
-                          </td>
-                          <td>Other</td>
-                          <td>
-                            <FormGroup>
-                              <Input
-                                defaultValue=""
-                                placeholder="Time (hh:mm)"
-                                type="text"
-                              ></Input>
-                            </FormGroup>
-                          </td>
-                          <td>
-                            <img
-                              className="add-btn"
-                              src={Add}
-                              alt="add button"
-                            />
-                          </td>
-                        </tr> */

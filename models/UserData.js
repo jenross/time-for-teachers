@@ -15,6 +15,7 @@ const userDataSchema = new Schema({
       date: { type: Date, default: Date.now }
     }
   ],
+  
   comparisonTime: [
     {
       scheduledTime: { type: String, required: true },
@@ -22,6 +23,7 @@ const userDataSchema = new Schema({
       date: { type: Date, default: Date.now }
     }
   ],
+   
   user: { type: Schema.Types.ObjectId, ref: "User" },
   date: { type: Date, default: Date.now }
 });

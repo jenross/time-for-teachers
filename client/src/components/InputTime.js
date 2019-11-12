@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Input } from "reactstrap";
 import API from "./utility/API";
+import plus from './images/ic_add_circle_48px.svg';
+import './InputTime.css';
 
 export default class InputTime extends Component {
   state = {
@@ -30,7 +32,7 @@ export default class InputTime extends Component {
           <Input onChange={this.handleInputChange} {...this.props} />
         </td>
         <td>
-          <button onClick={this.submitTime}>add time</button>
+          <img className="add-btn" onClick={this.submitTime} src={plus} alt="plus icon" />
         </td>
       </div>
     );

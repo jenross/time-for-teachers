@@ -7,13 +7,6 @@ import InputTime from "./InputTime";
 export default function CategoryRow(props) {
   return (
     <tr>
-      <td className="text-center">
-        <FormGroup check>
-          <Label check>
-            <span className="form-check-sign"></span>
-          </Label>
-        </FormGroup>
-      </td>
       <td>
         <Timer
           category={props.category}
