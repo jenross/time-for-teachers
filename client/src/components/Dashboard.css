@@ -7,8 +7,7 @@
 }
 
 .content {
-    margin-top: 80px; 
-    padding: 20px; 
+    background: #52E0E5;
 }
 
 .add-btn {
@@ -17,4 +16,48 @@
 
 .weekday-header {
     background-color: #EA543A;
+}
+
+.card-pricing {
+    background: #D6D1B1!important;
+    margin-left: 50px; 
+    margin-top: 10px; 
+}
+
+.category-title, .planning-description {
+    color: black!important; 
+}
+
+.category-title {
+    font-size: 14px; 
+}
+
+.planning-description {
+    font-size: 14px; 
+    margin-top: 8px; 
+}
+
+#plus-btn-planning {
+    margin-top: 8px; 
+    cursor: pointer; 
+}
+
+.current-date-header {
+    font-size: 30px; 
+    color: white; 
+}
+
+.secondary-nav {
+    margin-top: 200px;
+    width: 100%; 
+    background-color: #EA543A!important; 
+}
+
+.secondary-nav-text {
+    font-size: 15px!important; 
+}
+
+.card-profile {
+    margin-left: 50px; 
+    background-color: #D6D1B1!important;
 }
