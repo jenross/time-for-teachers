@@ -14,6 +14,7 @@ import {
   Col,
   Input
 } from "reactstrap";
+import plus from './images/ic_add_circle_48px.svg';
 
 const allTimeArr = [];
 
@@ -115,14 +116,14 @@ export default class Dashboard extends Component {
   submitTime = () => {
     API.createComparisonTime(localStorage.getItem("email"), {
       scheduledTime: this.state.scheduledTime,
-      accumulatedTime: this.state.allTime
+      accumulatedTime: moment.utc(this.state.allTime * 1000).format("HH:mm")
     })
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
   };
 
   render() {
-    console.log("THE DAY TODAY IS", moment().format("dddd"));
+    // console.log("THE DAY TODAY IS", moment().format("dddd"));
     return (
       <React.Fragment>
         <>
@@ -138,12 +139,18 @@ export default class Dashboard extends Component {
                   }}
                 ></Card>
               </Col>
-              <CardTitle tag="h4">{moment().format("LTS")}</CardTitle>
-              <CardTitle tag="h4">Tasks</CardTitle>{" "}
-            </Row>
+              </Row>
+              <Row>
+                <Col md="6">
+                  {/* get this to keep running without page refresh */}
+                  <h2>{moment().format('MMMM Do YYYY, h:mm:ss a')}</h2>
+                </Col>
+              </Row>
+            
 
             <Row>
               <Col xs={12} md={3}>
+                
                 <div
                   style={{
                     margin: "50px auto 50px auto",
@@ -151,26 +158,31 @@ export default class Dashboard extends Component {
                     backgroundColor: "#ccc"
                   }}
                 >
-                  <h3>Time Allotted</h3>
-                  <button onClick={this.submitTime}> BUTTON </button>
+                  <h3>Planning Time Allotted</h3>
+                  <img onClick={this.submitTime} src={plus} alt="plus icon" />
                   <Input
-                    type="number  "
+                    type="number"
                     name="scheduledTime"
                     id="exampleNumber"
                     placeholder="number placeholder"
                     onChange={this.handleInputChange}
                   />
                   <h4 style={{ padding: "20px" }}>
+                    {/* You recived{" "}
+                    {moment
+                      .utc(this.state.scheduledTime * 1000)
+                      .format("HH:mm")}{" "}
+                    hours and minutes of planning time today. */}
                     You recived:{" "}
                     {moment
                       .utc(this.state.scheduledTime * 1000)
                       .format("HH:mm:ss")}{" "}
-                    Hours
+                    hours/minutes/seconds of planning time today. 
                   </h4>
                   <h4 style={{ padding: "20px" }}>
-                    You've spent:{" "}
-                    {moment.utc(this.state.allTime * 1000).format("HH:mm:ss")}{" "}
-                    Hours
+                    You've spent{" "}
+                    {moment.utc(this.state.allTime * 1000).format("HH")}{" "}
+                    hours and {moment.utc(this.state.allTime * 1000).format("mm")} minutes on required tasks today.
                   </h4>
                 </div>
               </Col>

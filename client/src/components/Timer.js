@@ -39,6 +39,8 @@ export default class Timer extends Component {
 
   startClock = () => {
     if (!this.state.clockRunning) {
+      counter = 0;
+      this.setState({ time: counter });
       let intervalId = setInterval(this.count, 1000);
       this.setState({ clockRunning: true, intervalId: intervalId });
     }
@@ -67,7 +69,7 @@ export default class Timer extends Component {
         )
         .catch(err => console.log(err));
     } else {
-      this.setState({ confirmation: "Cannot submitt" });
+      this.setState({ confirmation: "Cannot submit" });
     }
   };
 
