@@ -40,7 +40,7 @@ import charts from "./images/ic_insert_chart_48px.svg";
 import { CostExplorer } from "aws-sdk";
 
 const allTimeArr = [];
-
+let todaysDataArr = [];
 
 export default class Dashboard extends Component {
   state = {
@@ -106,15 +106,27 @@ export default class Dashboard extends Component {
             .then(res)
             .catch(err => console.log(err));
         }
+
         //? ======== get acumulated time data for the user submit function ======== //
         this.addAllTimeData(res.data[0].time);
 
+        todaysDataArr = [];
+
         res.data[0].time.forEach(x => {
-          if (x.date.slice(0, 10) !== this.state.todayDate) {
-            this.setState({ userDataToday: res.data[0].time });
+          if (x.date.slice(0, 10) === this.state.todayDate) {
+            todaysDataArr.push(x);
           }
         });
+        this.setState({ userDataToday: todaysDataArr });
+
         console.log("USER data TODAY", this.state.userDataToday);
+
+        // console.log(
+        //   "THE DATES",
+        //   res.data[0].time.map(x => {
+        //     return x.date.slice(0, 10);
+        //   })
+        // );
 
         console.log(
           " THIS IS WHAT IM TESTING AGAINST ",
@@ -138,7 +150,7 @@ export default class Dashboard extends Component {
 
   submitTime = () => {
     API.createComparisonTime(localStorage.getItem("email"), {
-      scheduledTime: this.state.scheduledTime,
+      scheduledTime: this.state.scheduledTime.replace(/:/gi, "."),
       accumulatedTime: this.state.allTime
     })
       .then(res => console.log("THIS IS THE DATA", res.data))
@@ -146,7 +158,6 @@ export default class Dashboard extends Component {
   };
 
   render() {
-    // console.log("THE DAY TODAY IS", moment().format("dddd"));
     return (
       <div className="content header-filter">
         <Navbar className="secondary-nav" expand="lg">
