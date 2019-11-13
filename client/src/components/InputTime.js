@@ -3,6 +3,7 @@ import { Input } from "reactstrap";
 import API from "./utility/API";
 import plus from "./images/ic_add_circle_48px.svg";
 import "./InputTime.css";
+import moment from "moment";
 
 export default class InputTime extends Component {
   state = {
@@ -22,7 +23,8 @@ export default class InputTime extends Component {
       return "Cannot Submitt 0";
     }
     API.saveUserData(this.props.category, {
-      [this.props.category]: this.state.userInput,
+      [this.props.category]: moment.duration(this.state.userInput).asSeconds(),
+      [this.props.convertedTime]: this.state.userInput,
       email: localStorage.getItem("email")
     })
       .then(res => this.setState({ userInput: "" }))
@@ -30,6 +32,10 @@ export default class InputTime extends Component {
   };
 
   render() {
+    console.log(
+      "ARE THE STILL SECONDS?>?>?>?>?",
+      moment.duration(this.state.userInput).asSeconds()
+    );
     return (
       <div className="time-input-container">
         <td>

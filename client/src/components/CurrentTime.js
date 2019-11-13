@@ -13,18 +13,7 @@ export default class CurrentTime extends Component {
     );
   }
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
   render() {
-    return (
-      <div name="time" onChange={this.handleInputChange}>
-        {moment().format("MMMM Do YYYY, h:mm:ss a")}
-      </div>
-    );
+    return <div name="time">{moment().format("MMMM Do YYYY, h:mm:ss a")}</div>;
   }
 }

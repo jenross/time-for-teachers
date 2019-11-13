@@ -46,25 +46,45 @@ let todaysDataArr = [];
 export default class Dashboard extends Component {
   state = {
     categories: [
-      { name: "Grading", category: "grading", time: 0 },
-      { name: "Lesson Planning", category: "lessonPlanning" },
+      {
+        name: "Grading",
+        category: "grading",
+        convertedTime: "gradingConverted"
+      },
+      {
+        name: "Lesson Planning",
+        category: "lessonPlanning",
+        convertedTime: "lessonPlanningConverted"
+      },
       {
         name: "Planning & Organizing Special Events",
-        category: "specialEventPlanning"
+        category: "specialEventPlanning",
+        convertedTime: "specialEventPlanningConverted"
       },
-      { name: "Communication", category: "communications" },
-      { name: "Legal Documentation & Paperwork", category: "paperwork" },
+      {
+        name: "Communication",
+        category: "communications",
+        convertedTime: "communicationsConverted"
+      },
+      {
+        name: "Legal Documentation & Paperwork",
+        category: "paperwork",
+        convertedTime: "paperworkConverted"
+      },
       {
         name: "Mandatory Trainings & Continuing Education",
-        category: "continuingEducation"
+        category: "continuingEducation",
+        convertedTime: "continuingEducationConverted"
       },
-      { name: "Other", category: "other" }
+      { name: "Other", category: "other", convertedTime: "otherConverted" }
     ],
     scheduledTime: 0,
     userData: [],
     userDataToday: [],
     today: moment().format("dddd"),
-    todayDate: moment().format("YYYY-MM-DD"),
+    todayDate: moment()
+      .add(5, "hours") //? accounts for the 5 hour differenc in the mongo timestamp//
+      .format("YYYY-MM-DD"),
     allTime: []
   };
 
@@ -93,7 +113,6 @@ export default class Dashboard extends Component {
     this.setState({
       allTime: allTimeArr.map(x => parseInt(x)).reduce((a, b) => a + b, 0)
     });
-    console.log(this.state.allTime);
     console.log(data);
   };
 
@@ -136,7 +155,10 @@ export default class Dashboard extends Component {
   submitTime = () => {
     API.createComparisonTime(localStorage.getItem("email"), {
       scheduledTime: this.state.scheduledTime.replace(/:/gi, "."),
-      accumulatedTime: this.state.allTime
+      accumulatedTime: moment
+        .utc(this.state.allTime * 1000)
+        .format("HH:mm")
+        .replace(/:/gi, ".")
     })
       .then(res => console.log("THIS IS THE DATA", res.data))
       .catch(err => console.log(err));
@@ -151,10 +173,8 @@ export default class Dashboard extends Component {
               <p>Hello, user!</p>
             </NavbarBrand>
             <NavbarBrand className="mx-auto secondary-nav-text">
-              {/* {moment().format("MMMM Do YYYY, h:mm:ss a")} */}
               <CurrentTime />
             </NavbarBrand>
-
             <Nav navbar>
               <NavItem>
                 <NavLink href="/reports" onClick={e => e.preventDefault()}>
@@ -234,6 +254,7 @@ export default class Dashboard extends Component {
                       <CategoryRow
                         getSum={this.getSum(x.category)}
                         category={x.category}
+                        convertedTime={x.convertedTime}
                         name={x.name}
                         array={x}
                       />

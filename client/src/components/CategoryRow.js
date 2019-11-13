@@ -3,7 +3,7 @@ import { FormGroup, Label } from "reactstrap";
 import Timer from "./Timer";
 import moment from "moment";
 import InputTime from "./InputTime";
-import './CategoryRow.css'; 
+import "./CategoryRow.css";
 
 export default function CategoryRow(props) {
   return (
@@ -24,6 +24,7 @@ export default function CategoryRow(props) {
           id="exampleNumber"
           placeholder="input your time"
           category={props.category}
+          convertedTime={props.convertedTime}
         />
       </FormGroup>
     </tr>
