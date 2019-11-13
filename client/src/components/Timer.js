@@ -12,8 +12,8 @@ export default class Timer extends Component {
   state = {
     time: 0,
     clockRunning: false,
-    converted: "00:00",
-    disabled: false
+    converted: "00:00"
+    // disabled: false
   };
 
   submitTime = () => {
@@ -43,9 +43,11 @@ export default class Timer extends Component {
   };
 
   startClock = () => {
-    if (this.state.disabled) {
-      return;
-    }
+    // if (this.state.disabled) {
+    //   return;
+    // }
+    this.refs.btn.setAttribute("disabled", "disabled");
+
     this.setState({ disabled: true });
     if (!this.state.clockRunning) {
       counter = 0;
@@ -92,20 +94,21 @@ export default class Timer extends Component {
         <div className="display">{this.state.converted}</div>
         <div className="buttons">
           <img
-            className="timer-btns"
+            className="timer-btns start"
+            ref="btn"
             onClick={this.startClock}
             disabled={this.state.disabled}
             src={play}
             alt="play icon"
           />
           <img
-            className="timer-btns"
+            className="timer-btns stop"
             onClick={this.stopClock}
             src={stop}
             alt="stop icon"
           />
           <img
-            className="timer-btns"
+            className="timer-btns submit"
             onClick={this.submitTime}
             src={plus}
             alt="plus icon"
