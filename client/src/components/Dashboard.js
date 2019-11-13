@@ -38,6 +38,7 @@ import plan from "./images/calendar-60.svg";
 import clock from "./images/ic_timer_48px.svg";
 import charts from "./images/ic_insert_chart_48px.svg";
 import { CostExplorer } from "aws-sdk";
+import CurrentTime from "./CurrentTime";
 
 const allTimeArr = [];
 let todaysDataArr = [];
@@ -62,7 +63,6 @@ export default class Dashboard extends Component {
     scheduledTime: 0,
     userData: [],
     userDataToday: [],
-    postDates: [],
     today: moment().format("dddd"),
     todayDate: moment().format("YYYY-MM-DD"),
     allTime: []
@@ -106,36 +106,21 @@ export default class Dashboard extends Component {
             .then(res)
             .catch(err => console.log(err));
         }
-
+        //? =============================================================================================//
         //? ======== get acumulated time data for the user submit function ======== //
         this.addAllTimeData(res.data[0].time);
 
         todaysDataArr = [];
-
         res.data[0].time.forEach(x => {
           if (x.date.slice(0, 10) === this.state.todayDate) {
             todaysDataArr.push(x);
           }
         });
         this.setState({ userDataToday: todaysDataArr });
-
-        console.log("USER data TODAY", this.state.userDataToday);
-
-        // console.log(
-        //   "THE DATES",
-        //   res.data[0].time.map(x => {
-        //     return x.date.slice(0, 10);
-        //   })
-        // );
-
-        console.log(
-          " THIS IS WHAT IM TESTING AGAINST ",
-          moment().format("YYYY-MM-DD")
-        );
+        console.log("USER DATA TODAY", this.state.userDataToday);
 
         this.setState({
-          userData: res.data[0].time,
-          postDates: res.data[0].date
+          userData: this.state.userDataToday
         });
       })
       .catch(err => console.log(err));
@@ -166,7 +151,8 @@ export default class Dashboard extends Component {
               <p>Hello, user!</p>
             </NavbarBrand>
             <NavbarBrand className="mx-auto secondary-nav-text">
-              {moment().format("MMMM Do YYYY, h:mm:ss a")}
+              {/* {moment().format("MMMM Do YYYY, h:mm:ss a")} */}
+              <CurrentTime />
             </NavbarBrand>
 
             <Nav navbar>
