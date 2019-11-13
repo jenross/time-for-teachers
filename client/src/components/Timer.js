@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import API from "./utility/API";
-import plus from './images/ic_add_circle_48px.svg';
-import play from './images/ic_play_circle_filled_white_48px.svg';
-import stop from './images/ic_stop_48px.svg';
-import './Timer.css';
+import plus from "./images/ic_add_circle_48px.svg";
+import play from "./images/ic_play_circle_filled_white_48px.svg";
+import stop from "./images/ic_stop_48px.svg";
+import "./Timer.css";
 
 let counter = 0;
 
@@ -48,7 +48,7 @@ export default class Timer extends Component {
       let intervalId = setInterval(this.count, 1000);
       this.setState({ clockRunning: true, intervalId: intervalId });
     }
-  };  
+  };
 
   stopClock = () => {
     console.log("stop");
@@ -66,14 +66,11 @@ export default class Timer extends Component {
       })
         .then(
           this.setState({
-            confirmation: "time submitted",
             time: 0,
             converted: "00:00"
           })
         )
         .catch(err => console.log(err));
-    } else {
-      this.setState({ confirmation: "Cannot submit" });
     }
   };
 
@@ -82,11 +79,25 @@ export default class Timer extends Component {
       <div className="wrapper">
         <div className="display">{this.state.converted}</div>
         <div className="buttons">
-          <img className="timer-btns" onClick={this.startClock} src={play} alt="play icon" />
-          <img className="timer-btns" onClick={this.stopClock} src={stop} alt="stop icon" />
-          <img className="timer-btns" onClick={this.submitTime} src={plus} alt="plus icon" />
+          <img
+            className="timer-btns"
+            onClick={this.startClock}
+            src={play}
+            alt="play icon"
+          />
+          <img
+            className="timer-btns"
+            onClick={this.stopClock}
+            src={stop}
+            alt="stop icon"
+          />
+          <img
+            className="timer-btns"
+            onClick={this.submitTime}
+            src={plus}
+            alt="plus icon"
+          />
         </div>
-        <h1>{this.state.confirmation}</h1>
       </div>
     );
   }

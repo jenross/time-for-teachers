@@ -37,8 +37,10 @@ import background from "./images/pencils_yellow.png";
 import plan from "./images/calendar-60.svg";
 import clock from "./images/ic_timer_48px.svg";
 import charts from "./images/ic_insert_chart_48px.svg";
+import { CostExplorer } from "aws-sdk";
 
 const allTimeArr = [];
+
 
 export default class Dashboard extends Component {
   state = {
@@ -91,7 +93,6 @@ export default class Dashboard extends Component {
     this.setState({
       allTime: allTimeArr.map(x => parseInt(x)).reduce((a, b) => a + b, 0)
     });
-
     console.log(this.state.allTime);
     console.log(data);
   };
@@ -108,17 +109,17 @@ export default class Dashboard extends Component {
         //? ======== get acumulated time data for the user submit function ======== //
         this.addAllTimeData(res.data[0].time);
 
-        // res.data[0].time.forEach(x => {
-        //   if (x.date.slice(0, 10) !== this.state.todayDate) {
-        //     this.setState({ userDataToday: res.data[0].time });
-        //   }
-        // });
-        // console.log("USER data TODAY", this.state.userDataToday);
+        res.data[0].time.forEach(x => {
+          if (x.date.slice(0, 10) !== this.state.todayDate) {
+            this.setState({ userDataToday: res.data[0].time });
+          }
+        });
+        console.log("USER data TODAY", this.state.userDataToday);
 
-        // console.log(
-        //   " THIS IS WHAT IM TESTING AGAINST ",
-        //   moment().format("YYYY-MM-DD")
-        // );
+        console.log(
+          " THIS IS WHAT IM TESTING AGAINST ",
+          moment().format("YYYY-MM-DD")
+        );
 
         this.setState({
           userData: res.data[0].time,
@@ -194,6 +195,7 @@ export default class Dashboard extends Component {
                 </p>
                 <Input
                   onChange={this.handleInputChange}
+                  name="scheduledTime"
                   id="exampleNumber"
                   placeholder="time hh:mm"
                   type="text"
@@ -206,9 +208,7 @@ export default class Dashboard extends Component {
                 />
                 <p className="card-description planning-description">
                   You recived:{" "}
-                  {moment
-                    .utc(this.state.scheduledTime * 1000)
-                    .format("HH:mm:ss")}{" "}
+                  {moment(this.state.scheduledTime, "HH:mm").format("HH:mm:ss")}{" "}
                   hours/minutes/seconds of planning time today.
                 </p>
                 <div className="icon icon-info">
@@ -220,10 +220,10 @@ export default class Dashboard extends Component {
                   />
                 </div>
                 <p className="card-description planning-description">
-                  You've spent {this.state.allTime}
-                  hours and{" "}
-                  {/* {moment.utc(this.state.allTime * 1000).format("mm")} minutes */}
-                  on required tasks today.
+                  You've spent{" "}
+                  {/* {moment.utc(this.state.allTime * 1000).format("HH")} hours and{" "} */}
+                  {moment.utc(this.state.allTime * 1000).format("HH:MM:ss")}{" "}
+                  minutes on required tasks today.
                 </p>
               </CardBody>
             </Card>

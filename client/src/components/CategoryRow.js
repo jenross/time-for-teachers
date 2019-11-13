@@ -19,7 +19,7 @@ export default function CategoryRow(props) {
       <td>{moment.utc(props.getSum * 1000).format("HH:mm:ss")}</td>
       <FormGroup>
         <InputTime
-          type="number"
+          type="text"
           name="userInput"
           id="exampleNumber"
           placeholder="input your time"
