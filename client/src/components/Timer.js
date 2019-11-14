@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import API from "./utility/API";
-import plus from './images/ic_add_circle_48px.svg';
-import play from './images/ic_play_circle_filled_white_48px.svg';
-import stop from './images/ic_stop_48px.svg';
-import './Timer.css';
+import plus from "./images/ic_add_circle_48px.svg";
+import play from "./images/ic_play_circle_filled_white_48px.svg";
+import stop from "./images/ic_stop_48px.svg";
+import "./Timer.css";
+import moment from "moment";
 
 let counter = 0;
 
@@ -12,7 +13,7 @@ export default class Timer extends Component {
     time: 0,
     clockRunning: false,
     converted: "00:00",
-    confirmation: ""
+    disabled: false
   };
 
   submitTime = () => {
@@ -42,18 +43,21 @@ export default class Timer extends Component {
   };
 
   startClock = () => {
+    if (this.state.disabled) {
+      return;
+    }
+    this.setState({ disabled: true });
     if (!this.state.clockRunning) {
       counter = 0;
       this.setState({ time: counter });
       let intervalId = setInterval(this.count, 1000);
       this.setState({ clockRunning: true, intervalId: intervalId });
     }
-  };  
+  };
 
   stopClock = () => {
     console.log("stop");
     clearInterval(this.state.intervalId);
-
     this.setState({ clockRunning: false });
   };
 
@@ -62,31 +66,51 @@ export default class Timer extends Component {
     if (counter !== 0 && !this.state.clockRunning) {
       API.saveUserData(this.props.category, {
         [this.props.category]: this.state.time,
+        [this.state.convertedTime]: moment
+          .utc(this.state.time * 1000)
+          .format("HH:mm")
+          .replace(/:/gi, "."),
         email: localStorage.getItem("email")
       })
         .then(
           this.setState({
-            confirmation: "time submitted",
             time: 0,
             converted: "00:00"
           })
         )
         .catch(err => console.log(err));
-    } else {
-      this.setState({ confirmation: "Cannot submit" });
     }
   };
 
+  // Handler for on click
+
   render() {
+    console.log(this.state.disabled);
+
     return (
       <div className="wrapper">
         <div className="display">{this.state.converted}</div>
         <div className="buttons">
-          <img className="timer-btns" onClick={this.startClock} src={play} alt="play icon" />
-          <img className="timer-btns" onClick={this.stopClock} src={stop} alt="stop icon" />
-          <img className="timer-btns" onClick={this.submitTime} src={plus} alt="plus icon" />
+          <img
+            className="timer-btns"
+            onClick={this.startClock}
+            disabled={this.state.disabled}
+            src={play}
+            alt="play icon"
+          />
+          <img
+            className="timer-btns"
+            onClick={this.stopClock}
+            src={stop}
+            alt="stop icon"
+          />
+          <img
+            className="timer-btns"
+            onClick={this.submitTime}
+            src={plus}
+            alt="plus icon"
+          />
         </div>
-        <h1>{this.state.confirmation}</h1>
       </div>
     );
   }

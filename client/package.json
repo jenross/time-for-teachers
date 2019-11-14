@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://timeforteachers.us",
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "aws-amplify": "^1.2.4",
     "aws-amplify-react": "^2.5.4",

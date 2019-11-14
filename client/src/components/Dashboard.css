@@ -1,68 +1,69 @@
 .dashboard-container {
-    display: flex; 
+  display: flex;
 }
 
 .dashboard-header {
-    text-align: center; 
+  text-align: center;
 }
 
 .content {
-    background: #439da1;
+  background: #439da1;
 }
 
 .add-btn {
-    width: 30px;
+  width: 30px;
 }
 
 .weekday-header {
-    background-color: #EA543A;
+  background-color: #ea543a;
 }
 
 .card-pricing {
-    background: #F0F3F5!important;
-    margin-left: 50px; 
-    margin-top: 10px; 
+  background: #f0f3f5 !important;
+  margin-left: 50px;
+  margin-top: 10px;
 }
 
-.category-title, .planning-description {
-    color: black!important; 
+.category-title,
+.planning-description {
+  color: black !important;
 }
 
 .category-title {
-    font-size: 14px; 
+  font-size: 14px;
 }
 
 .planning-description {
-    font-size: 14px; 
-    margin-top: 8px; 
+  font-size: 14px;
+  margin-top: 8px;
 }
 
 #plus-btn-planning {
-    margin-top: 8px; 
-    cursor: pointer; 
+  margin-top: 8px;
+  cursor: pointer;
 }
 
 .current-date-header {
-    font-size: 30px; 
-    color: white; 
+  font-size: 30px;
+  color: white;
 }
 
 .secondary-nav {
-    margin-top: 200px;
-    width: 100%; 
-    background-color: #EA543A!important; 
+  margin-top: 200px;
+  width: 100%;
+  background-color: #ea543a !important;
 }
 
 .secondary-nav-text {
-    font-size: 15px!important; 
+  font-size: 15px !important;
 }
 
 .card-profile {
-    margin-left: 50px; 
-    background-color: #F0F3F5!important;
-    margin-top: 10px!important; 
+  margin-left: 50px;
+  background-color: #f0f3f5 !important;
+  margin-top: 10px !important;
 }
 
 .table-body {
-    border: 1px solid white; 
+  border: 1px solid white;
 }

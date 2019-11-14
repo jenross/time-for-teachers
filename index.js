@@ -3,18 +3,24 @@ const bodyParser = require("body-parser");
 const pino = require("express-pino-logger")();
 const mongoose = require("mongoose");
 const routes = require("./routes");
-
+const request = require('request');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(pino);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
-app.use(express.static("client/build"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 
 app.use(routes);

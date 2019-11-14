@@ -33,6 +33,13 @@
     
 }
 
+@media only screen and (min-width: 900px) {
+    .hero-text {
+        margin-right: 100px!important; 
+    }
+    
+}
+
 .italic {
     font-style: italic; 
 }

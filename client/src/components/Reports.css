@@ -12,7 +12,7 @@
 
 .left {
     margin-right: 40px; 
-    margin-left: 160px; 
+    /* margin-left: 160px;  */
 }
 
 .second {
@@ -20,6 +20,8 @@
     margin-bottom: 20px;  
 }
 
-.header-filter {
+.main-container {
     background-color: #439da1;
+    padding: 160px; 
 }
+

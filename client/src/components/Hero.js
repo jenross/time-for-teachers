@@ -34,7 +34,7 @@ function Hero() {
     }
   });
   return (
-    <>
+   
       <div className="page-header page-header-large">
         <div
           className="page-header-image"
@@ -54,7 +54,7 @@ function Hero() {
           </Row>
         </div>
       </div>
-    </>
+    
   );
 }
 

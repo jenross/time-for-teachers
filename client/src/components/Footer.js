@@ -20,7 +20,7 @@ import { Container } from "reactstrap";
 
 function Footer() {
   return (
-    <>
+ 
       <footer className="footer footer-default">
         <Container>
           <nav>
@@ -65,7 +65,7 @@ function Footer() {
           </div>
         </Container>
       </footer>
-    </>
+
   );
 }
 

@@ -39,7 +39,7 @@ function Home() {
     };
   });
   return (
-    <>
+    
       <div className="wrapper">
         <Hero />
         <div className="section">
@@ -50,7 +50,7 @@ function Home() {
                   <Col className="how-it-works mr-auto ml-auto" md="8">
                     <h2 className="section-title">How it Works</h2>
                     <h4 className="description">
-                    <span className="italic">Time for Teachers</span> helps school districts track the time teachers are spending on required tasks and measures it against how much planning time they actually get.
+                    <span className="italic">Time for Teachers</span> helps teachers track the time they are spending on required tasks and measures it against how much planning time they actually get.
                     </h4>
                   </Col>
                 </Row>
@@ -73,7 +73,7 @@ function Home() {
                       </div>
                       <h4 className="info-title">Report Generation</h4>
                       <p className="description">
-                        Beautiful charts are automatically generated to show teachers' personal time, as well as the consolidated district averages.
+                        Beautiful charts are automatically generated to show your tracked time, as well as the consolidated averages for your district.
                       </p>
                     </div>
                   </Col>
@@ -183,7 +183,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </>
+    
   );
 }
 
