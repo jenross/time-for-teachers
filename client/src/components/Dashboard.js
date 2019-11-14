@@ -236,8 +236,8 @@ export default class Dashboard extends Component {
                   />
                 </div>
                 <p className="card-description planning-description">
-                  Not including required meetings, picking up/dropping off your
-                  class, and going to the bathroom.
+                  Not including required meetings, and picking up/dropping off your
+                  class.
                 </p>
                 <Input
                   onChange={this.handleInputChange}
@@ -259,21 +259,7 @@ export default class Dashboard extends Component {
                   )}{" "}
                   hours/minutes/seconds of planning time today.
                 </p>
-                <div className="icon icon-info">
-                  <img
-                    className="clock-icon"
-                    src={clock}
-                    I
-                    alt="stopwatch icon"
-                  />
-                </div>
-                <p className="card-description planning-description">
-                  You've spent{" "}
-                  {/* {moment.utc(this.state.allTime * 1000).format("HH")} hours and{" "} */}
-                  {moment.utc(this.state.allTime * 1000).format("HH:MM")}{" "}
-                  {/* {this.state.allTime} */}
-                  minutes on required tasks today.
-                </p>
+                
               </CardBody>
             </Card>
           </Col>
