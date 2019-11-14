@@ -32,8 +32,8 @@ export default class Timer extends Component {
     } else if (minutes < 10) {
       minutes = "0" + minutes;
     }
-    const convertedTime = minutes + ":" + seconds;
-    this.setState({ converted: convertedTime });
+    const convertedDisplayTime = minutes + ":" + seconds;
+    this.setState({ converted: convertedDisplayTime });
   };
 
   count = () => {
@@ -43,14 +43,7 @@ export default class Timer extends Component {
   };
 
   startClock = () => {
-    // if (this.state.disabled) {
-    //   return;
-    // }
-    this.refs.btn.setAttribute("disabled", "disabled");
-
-    this.setState({ disabled: true });
     if (!this.state.clockRunning) {
-      counter = 0;
       this.setState({ time: counter });
       let intervalId = setInterval(this.count, 1000);
       this.setState({ clockRunning: true, intervalId: intervalId });
@@ -84,11 +77,8 @@ export default class Timer extends Component {
     }
   };
 
-  // Handler for on click
 
   render() {
-    console.log(this.state.disabled);
-
     return (
       <div className="wrapper">
         <div className="display">{this.state.converted}</div>

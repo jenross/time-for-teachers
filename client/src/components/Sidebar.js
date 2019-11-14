@@ -8,7 +8,10 @@ import Play from './images/ic_play_circle_filled_white_48px.svg'
 import './Sidebar.css';
 
 // reactstrap components
-import { Container, Row, Col, Card, CardBody, CardTitle, Button } from "reactstrap";
+import { 
+  // Container, 
+  // Row, 
+  Col, Card, CardBody, CardTitle, Button } from "reactstrap";
 
 class Sidebar extends React.Component {
     render() {

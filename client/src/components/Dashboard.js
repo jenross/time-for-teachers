@@ -4,24 +4,24 @@ import CategoryRow from "./CategoryRow";
 import "./Dashboard.css";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import {
-  Button,
+  // Button,
   Card,
   CardBody,
-  CardHeader,
+  // CardHeader,
   Table,
-  CardFooter,
-  CardTitle,
-  Label,
-  FormGroup,
-  Form,
+  // CardFooter,
+  // CardTitle,
+  // Label,
+  // FormGroup,
+  // Form,
   Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
+  // InputGroupAddon,
+  // InputGroupText,
+  // InputGroup,
   Container,
-  Alert,
+  // Alert,
   Row,
   Col,
   Navbar,
@@ -31,17 +31,18 @@ import {
   Nav
 } from "reactstrap";
 import plus from "./images/ic_add_circle_48px.svg";
-import play from "./images/ic_play_circle_filled_white_48px.svg";
-import stop from "./images/ic_stop_48px.svg";
-import background from "./images/pencils_yellow.png";
+// import play from "./images/ic_play_circle_filled_white_48px.svg";
+// import stop from "./images/ic_stop_48px.svg";
+// import background from "./images/pencils_yellow.png";
 import plan from "./images/calendar-60.svg";
 import clock from "./images/ic_timer_48px.svg";
 import charts from "./images/ic_insert_chart_48px.svg";
-import { CostExplorer } from "aws-sdk";
+// import { CostExplorer } from "aws-sdk";
 import CurrentTime from "./CurrentTime";
 
 const allTimeArr = [];
 let todaysDataArr = [];
+let todaysSchduledTimeArr = [];
 
 export default class Dashboard extends Component {
   state = {
@@ -79,6 +80,7 @@ export default class Dashboard extends Component {
       { name: "Other", category: "other", convertedTime: "otherConverted" }
     ],
     scheduledTime: 0,
+    scheduledTimeToday: 0,
     userData: [],
     userDataToday: [],
     today: moment().format("dddd"),
@@ -113,7 +115,7 @@ export default class Dashboard extends Component {
     this.setState({
       allTime: allTimeArr.map(x => parseInt(x)).reduce((a, b) => a + b, 0)
     });
-    console.log(data);
+    // console.log(data);
   };
 
   componentDidMount() {
@@ -127,7 +129,7 @@ export default class Dashboard extends Component {
         }
         //? =============================================================================================//
         //? ======== get acumulated time data for the user submit function ======== //
-        this.addAllTimeData(res.data[0].time);
+        // this.addAllTimeData(res.data[0].time);
 
         todaysDataArr = [];
         res.data[0].time.forEach(x => {
@@ -136,11 +138,32 @@ export default class Dashboard extends Component {
           }
         });
         this.setState({ userDataToday: todaysDataArr });
-        console.log("USER DATA TODAY", this.state.userDataToday);
+        // console.log("USER DATA TODAY", this.state.userDataToday);
+        // console.log(this.state.userDataToday);
+
+        //! CHANGE THIS LATER //
+        todaysSchduledTimeArr = [];
+        res.data[0].comparisonTime.forEach(x => {
+          if (x.date.slice(0, 10) === this.state.todayDate) {
+            console.log("What is this?", x.scheduledTime);
+            todaysSchduledTimeArr.push(x.scheduledTime);
+          }
+        });
+        this.setState({ scheduledTimeToday: todaysSchduledTimeArr[0] });
+        //! CHANGE THIS LATER //
+
+        this.setState({ userDataToday: todaysDataArr });
+
+        //!========//
+        this.addAllTimeData(this.state.userDataToday);
+        // console.log(this.state.allTime);
+        //!========//
 
         this.setState({
           userData: this.state.userDataToday
         });
+
+        console.log(res.data[0].comparisonTime);
       })
       .catch(err => console.log(err));
   }
@@ -165,6 +188,12 @@ export default class Dashboard extends Component {
   };
 
   render() {
+    console.log(
+      "Today's date is: ",
+      moment()
+        .add(5, "hours") //? accounts for the 5 hour differenc in the mongo timestamp//
+        .format("YYYY-MM-DD HH:mm:ss")
+    );
     return (
       <div className="content header-filter">
         <Navbar className="secondary-nav" expand="lg">
@@ -225,7 +254,9 @@ export default class Dashboard extends Component {
                 />
                 <p className="card-description planning-description">
                   You recived:{" "}
-                  {moment(this.state.scheduledTime, "HH:mm").format("HH:mm:ss")}{" "}
+                  {moment(this.state.scheduledTimeToday, "HH:mm").format(
+                    "HH:mm:ss"
+                  )}{" "}
                   hours/minutes/seconds of planning time today.
                 </p>
                 <div className="icon icon-info">
@@ -239,7 +270,8 @@ export default class Dashboard extends Component {
                 <p className="card-description planning-description">
                   You've spent{" "}
                   {/* {moment.utc(this.state.allTime * 1000).format("HH")} hours and{" "} */}
-                  {moment.utc(this.state.allTime * 1000).format("HH:MM:ss")}{" "}
+                  {moment.utc(this.state.allTime * 1000).format("HH:MM")}{" "}
+                  {/* {this.state.allTime} */}
                   minutes on required tasks today.
                 </p>
               </CardBody>

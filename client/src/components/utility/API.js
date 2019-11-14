@@ -10,6 +10,7 @@ export default {
     );
   },
   saveUserData: function(category, userData) {
+    console.log("User Data", userData);
     return axios.post(
       `http://teachers.timeforteachers.us/api/userdatas/${category}`,
       userData

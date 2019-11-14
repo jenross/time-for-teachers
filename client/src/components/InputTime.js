@@ -32,10 +32,6 @@ export default class InputTime extends Component {
   };
 
   render() {
-    console.log(
-      "ARE THE STILL SECONDS?>?>?>?>?",
-      moment.duration(this.state.userInput).asSeconds()
-    );
     return (
       <div className="time-input-container">
         <td>

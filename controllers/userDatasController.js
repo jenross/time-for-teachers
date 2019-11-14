@@ -12,6 +12,7 @@ module.exports = {
   },
 
   createNewTimeInput(req, res) {
+    console.log(req.body);
     db.User.findOne({ email: req.body.email }).then(results => {
       db.UserData.findOneAndUpdate(
         { user: results._id },
