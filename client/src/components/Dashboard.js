@@ -140,7 +140,6 @@ export default class Dashboard extends Component {
         this.setState({ userDataToday: todaysDataArr });
         // console.log("USER DATA TODAY", this.state.userDataToday);
         // console.log(this.state.userDataToday);
-
         //! CHANGE THIS LATER //
         todaysSchduledTimeArr = [];
         res.data[0].comparisonTime.forEach(x => {
