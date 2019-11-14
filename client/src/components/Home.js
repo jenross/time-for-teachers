@@ -8,12 +8,12 @@ import send from './images/send-2.svg';
 
 // reactstrap components
 import {
-  Badge,
+  // Badge,
   Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardTitle,
+  // Card,
+  // CardBody,
+  // CardFooter,
+  // CardTitle,
   FormGroup,
   Form,
   Input,

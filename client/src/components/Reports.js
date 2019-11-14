@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import './Reports.css'; 
+import "./Reports.css";
 import {
-    Card,
-    CardBody,
-    CardHeader,
-    CardTitle,
-    Table,
-    Row,
-    Col,
-    Input, 
-    Container 
-  } from "reactstrap";
+  // Card,
+  // CardBody,
+  // CardHeader,
+  // CardTitle,
+  // Table,
+  Row
+  // Col,
+  // Input,
+  // Container
+} from "reactstrap";
 
 export default class Reports extends Component {
     render() {
