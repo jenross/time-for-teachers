@@ -1,5 +1,23 @@
 .timer-btns {
-    width: 35px;
-    height: 35px; 
-    cursor: pointer; 
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.start:hover {
+  background-color: green;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+
+.stop:hover {
+  background-color: red;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+
+.submit:hover {
+  background-color: rgb(71, 114, 231);
+  border-radius: 50px;
+  transition: 0.5s;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { FormGroup, Label } from "reactstrap";
+import { FormGroup } from "reactstrap";
 import Timer from "./Timer";
 import moment from "moment";
 import InputTime from "./InputTime";
