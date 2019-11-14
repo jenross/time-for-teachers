@@ -4,18 +4,18 @@ const pino = require("express-pino-logger")();
 const mongoose = require("mongoose");
 const routes = require("./routes");
 
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(pino);
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+app.use(express.static("client/build"));
+
 
 app.use(routes);
 
