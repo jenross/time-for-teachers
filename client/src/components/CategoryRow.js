@@ -13,6 +13,7 @@ export default function CategoryRow(props) {
           category={props.category}
           array={props.array}
           getSum={props.getSum}
+          convertedTime={props.convertedTime}
         />
       </td>
       <td>{props.name}</td>
