@@ -101,6 +101,7 @@ export default class Dashboard extends Component {
   };
 
   addAllTimeData = data => {
+    console.log(data);
     data.forEach(x => {
       allTimeArr.push(
         x.grading ||
@@ -115,6 +116,8 @@ export default class Dashboard extends Component {
     this.setState({
       allTime: allTimeArr.map(x => parseInt(x)).reduce((a, b) => a + b, 0)
     });
+    console.log(this.state.allTime);
+
     // console.log(data);
   };
 
@@ -129,7 +132,6 @@ export default class Dashboard extends Component {
         }
         //? =============================================================================================//
         //? ======== get acumulated time data for the user submit function ======== //
-        // this.addAllTimeData(res.data[0].time);
 
         todaysDataArr = [];
         res.data[0].time.forEach(x => {
@@ -162,7 +164,7 @@ export default class Dashboard extends Component {
           userData: this.state.userDataToday
         });
 
-        console.log(res.data[0].comparisonTime);
+        // console.log(res.data[0].comparisonTime);
       })
       .catch(err => console.log(err));
   }
@@ -175,24 +177,22 @@ export default class Dashboard extends Component {
   };
 
   submitTime = () => {
-    API.createComparisonTime(localStorage.getItem("email"), {
-      scheduledTime: this.state.scheduledTime.replace(/:/gi, "."),
-      accumulatedTime: moment
-        .utc(this.state.allTime * 1000)
-        .format("HH:mm")
-        .replace(/:/gi, ".")
-    })
-      .then(res => console.log("THIS IS THE DATA", res.data))
-      .catch(err => console.log(err));
+    if (this.state.scheduledTime) {
+      //? prevent the user from submitting without adding time //
+      API.createComparisonTime(localStorage.getItem("email"), {
+        scheduledTime: this.state.scheduledTime.replace(/:/gi, "."),
+        accumulatedTime: moment
+          .utc(this.state.allTime * 1000)
+          .format("HH:mm")
+          .replace(/:/gi, ".")
+      })
+        .then(res => console.log("THIS IS THE DATA", res.data))
+        .catch(err => console.log(err));
+    }
   };
 
   render() {
-    console.log(
-      "Today's date is: ",
-      moment()
-        .add(5, "hours") //? accounts for the 5 hour differenc in the mongo timestamp//
-        .format("YYYY-MM-DD HH:mm:ss")
-    );
+    console.log(this.state.allTime);
     return (
       <div className="content header-filter">
         <Navbar className="secondary-nav" expand="lg">
@@ -251,13 +251,19 @@ export default class Dashboard extends Component {
                   src={plus}
                   alt="plus icon"
                 />
-                <p className="card-description planning-description">
-                  You recived:{" "}
-                  {moment(this.state.scheduledTimeToday, "HH:mm").format(
-                    "HH:mm:ss"
-                  )}{" "}
-                  hours/minutes/seconds of planning time today.
-                </p>
+                {this.state.scheduledTimeToday ? ( //? ternerrary to display different message if the user has ot hasn't added their time for the day
+                  <p className="card-description planning-description">
+                    You recived:{" "}
+                    {moment(this.state.scheduledTimeToday, "HH:mm").format(
+                      "HH:mm:ss"
+                    )}{" "}
+                    hours/minutes/seconds of planning time today.
+                  </p>
+                ) : (
+                  <p className="card-description planning-description">
+                    Input the time you recived for all planning time today
+                  </p>
+                )}
                 <div className="icon icon-info">
                   <img
                     className="clock-icon"
@@ -266,13 +272,17 @@ export default class Dashboard extends Component {
                     alt="stopwatch icon"
                   />
                 </div>
-                <p className="card-description planning-description">
-                  You've spent{" "}
-                  {/* {moment.utc(this.state.allTime * 1000).format("HH")} hours and{" "} */}
-                  {moment.utc(this.state.allTime * 1000).format("HH:MM")}{" "}
-                  {/* {this.state.allTime} */}
-                  minutes on required tasks today.
-                </p>
+                {this.state.allTime ? (
+                  <p className="card-description planning-description">
+                    You've spent{" "}
+                    {moment.utc(this.state.allTime * 1000).format("HH:mm")}{" "}
+                    minutes on required tasks today.
+                  </p>
+                ) : (
+                  <p className="card-description planning-description">
+                    You currently have no time inputed for today
+                  </p>
+                )}
               </CardBody>
             </Card>
           </Col>

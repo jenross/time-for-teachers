@@ -12,8 +12,8 @@ export default class Timer extends Component {
   state = {
     time: 0,
     clockRunning: false,
-    converted: "00:00"
-    // disabled: false
+    converted: "00:00",
+    convertedTime: ""
   };
 
   submitTime = () => {
@@ -44,14 +44,16 @@ export default class Timer extends Component {
 
   startClock = () => {
     if (!this.state.clockRunning) {
-      this.setState({ time: counter });
-      let intervalId = setInterval(this.count, 1000);
+      this.setState({
+        time: counter
+        // convertedTime: moment.utc(counter * 1000).format("HH:mm")
+      });
+      let intervalId = setInterval(this.count, 10);
       this.setState({ clockRunning: true, intervalId: intervalId });
     }
   };
 
   stopClock = () => {
-    console.log("stop");
     clearInterval(this.state.intervalId);
     this.setState({ clockRunning: false });
   };
@@ -61,7 +63,7 @@ export default class Timer extends Component {
     if (counter !== 0 && !this.state.clockRunning) {
       API.saveUserData(this.props.category, {
         [this.props.category]: this.state.time,
-        [this.state.convertedTime]: moment
+        [this.props.convertedTime]: moment
           .utc(this.state.time * 1000)
           .format("HH:mm")
           .replace(/:/gi, "."),
@@ -77,7 +79,6 @@ export default class Timer extends Component {
     }
   };
 
-
   render() {
     return (
       <div className="wrapper">
@@ -87,7 +88,7 @@ export default class Timer extends Component {
             className="timer-btns start"
             ref="btn"
             onClick={this.startClock}
-            disabled={this.state.disabled}
+            // disabled={this.state.disabled}
             src={play}
             alt="play icon"
           />
