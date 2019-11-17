@@ -48,7 +48,7 @@ export default class Timer extends Component {
         time: counter
         // convertedTime: moment.utc(counter * 1000).format("HH:mm")
       });
-      let intervalId = setInterval(this.count, 10);
+      let intervalId = setInterval(this.count, 1000);
       this.setState({ clockRunning: true, intervalId: intervalId });
     }
   };
