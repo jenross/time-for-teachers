@@ -4,6 +4,8 @@ import CategoryRow from "./CategoryRow";
 import "./Dashboard.css";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import UpdateModal from "./UpdateModal";
+
 // import { Auth } from "aws-amplify";
 import {
   // Button,
@@ -125,8 +127,7 @@ export default class Dashboard extends Component {
     console.log(this.state.allTime);
   };
 
-  butt = () => {
-    console.log("suck my butt");
+  componentDidMount() {
     API.checkUserData(localStorage.getItem("email")) //? ======== Checks to see if user has a document associated, Creats one if they don't ======== //
 
       .then(res => {
@@ -173,69 +174,6 @@ export default class Dashboard extends Component {
         });
       })
       .catch(err => console.log(err));
-  };
-
-  componentDidMount() {
-    this.butt();
-    this.getSum();
-
-    // butt = () => {
-    //   API.checkUserData(localStorage.getItem("email")) //? ======== Checks to see if user has a document associated, Creats one if they don't ======== //
-
-    //     .then(res => {
-    //       if (res.data.length === 0) {
-    //         API.createDocument(localStorage.getItem("email"))
-    //           .then(res)
-    //           .catch(err => console.log(err));
-    //       }
-
-    //       todaysDataArr = []; //? ======== get acumulated time data for the user submit function ======== //
-    //       res.data[0].time.forEach(x => {
-    //         console.log(
-    //           "TODAY",
-    //           this.state.todayDate,
-    //           " VS ",
-    //           moment(x.date)
-    //             .subtract(5, "hours")
-    //             .format("YYYY-MM-DD"),
-    //           "MONGO DATE"
-    //         );
-    //         if (
-    //           moment(x.date)
-    //             .subtract(5, "hours")
-    //             .format("YYYY-MM-DD") === this.state.todayDate
-    //         ) {
-    //           todaysDataArr.push(x);
-    //         }
-    //       });
-    //       this.setState({ userDataToday: todaysDataArr });
-
-    //       //! CHANGE THIS LATER // So that if a submitted time already exists, prompt the user if they wish to update ir keep the same
-    //       todaysSchduledTimeArr = [];
-    //       res.data[0].comparisonTime.forEach(x => {
-    //         if (
-    //           moment(x.date)
-    //             .subtract(5, "hours")
-    //             .format("YYYY-MM-DD") === this.state.todayDate
-    //         ) {
-    //           // console.log("What is this?", x.scheduledTime);
-    //           todaysSchduledTimeArr.push(x.scheduledTime);
-    //         }
-    //       });
-    //       this.setState({ scheduledTimeToday: todaysSchduledTimeArr[0] });
-    //       //! CHANGE THIS LATER //
-
-    //       this.setState({ userDataToday: todaysDataArr });
-
-    //       //?======== Sums only todays data ///////
-    //       this.addAllTimeData(this.state.userDataToday);
-
-    //       this.setState({
-    //         userData: this.state.userDataToday
-    //       });
-    //     })
-    //     .catch(err => console.log(err));
-    // };
   }
 
   handleInputChange = event => {
@@ -282,7 +220,6 @@ export default class Dashboard extends Component {
 
   updateCounter = () => {
     this.setState({ counter: this.state.counter + 1 });
-    console.log(moment.utc(this.state.counter * 1000).format("HH:mm:ss"));
   };
 
   render() {
