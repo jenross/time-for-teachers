@@ -3,6 +3,7 @@ import API from "./utility/API";
 import plus from "./images/ic_add_circle_48px.svg";
 import play from "./images/ic_play_circle_filled_white_48px.svg";
 import stop from "./images/ic_stop_48px.svg";
+import UpdateModal from "./UpdateModal";
 import "./Timer.css";
 import moment from "moment";
 
@@ -40,27 +41,41 @@ export default class Timer extends Component {
     counter++;
     this.setState({ time: counter });
     this.timeConverter(counter);
+    this.props.updateCounter();
   };
 
   startClock = () => {
-    if (!this.state.clockRunning) {
-      this.setState({
-        time: counter
-        // convertedTime: moment.utc(counter * 1000).format("HH:mm")
-      });
-      let intervalId = setInterval(this.count, 1000);
-      this.setState({ clockRunning: true, intervalId: intervalId });
+    if (
+      !counter ||
+      (counter === this.props.counter &&
+        this.props.category === this.props.counterCategory)
+    ) {
+      if (!this.props.clockStatus) {
+        this.props.startClock(this.props.category);
+        let intervalId = setInterval(this.count, 1000);
+        this.setState({ clockRunning: true, intervalId: intervalId });
+        this.setState({
+          time: counter
+        });
+      }
     }
   };
 
   stopClock = () => {
-    clearInterval(this.state.intervalId);
-    this.setState({ clockRunning: false });
+    if (this.props.category === this.props.counterCategory) {
+      clearInterval(this.state.intervalId);
+      this.props.stopClock(this.props.category);
+      this.setState({ clockRunning: false });
+    }
   };
 
   submitTime = event => {
     event.preventDefault();
-    if (counter !== 0 && !this.state.clockRunning) {
+    if (
+      counter !== 0 &&
+      !this.state.clockRunning &&
+      this.props.category === this.props.counterCategory
+    ) {
       API.saveUserData(this.props.category, {
         [this.props.category]: this.state.time,
         [this.props.convertedTime]: moment
@@ -73,7 +88,9 @@ export default class Timer extends Component {
           this.setState({
             time: 0,
             converted: "00:00"
-          })
+          }),
+          // this.props.rerender(),
+          (counter = 0)
         )
         .catch(err => console.log(err));
     }
@@ -104,6 +121,7 @@ export default class Timer extends Component {
             src={plus}
             alt="plus icon"
           />
+          {/* <UpdateModal /> */}
         </div>
       </div>
     );

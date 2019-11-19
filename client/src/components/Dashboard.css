@@ -44,6 +44,18 @@
   cursor: pointer;
 }
 
+#plus-btn-planning:hover {
+  background-color: #439da1;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+
+#plus-btn-planning:active {
+  transform: scale(0.8);
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
 .current-date-header {
   font-size: 30px;
   color: white;
