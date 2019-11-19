@@ -71,7 +71,11 @@ export default class Timer extends Component {
 
   submitTime = event => {
     event.preventDefault();
-    if (counter !== 0 && !this.state.clockRunning) {
+    if (
+      counter !== 0 &&
+      !this.state.clockRunning &&
+      this.props.category === this.props.counterCategory
+    ) {
       API.saveUserData(this.props.category, {
         [this.props.category]: this.state.time,
         [this.props.convertedTime]: moment

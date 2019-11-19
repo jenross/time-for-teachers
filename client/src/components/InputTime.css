@@ -25,6 +25,7 @@
   background-color: black;
   display: none;
 }
+
 input[type="time"]::-webkit-clear-button {
   -webkit-appearance: none;
   -moz-appearance: none;
