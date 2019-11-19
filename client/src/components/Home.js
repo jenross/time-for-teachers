@@ -50,7 +50,7 @@ function Home() {
                   <Col className="how-it-works mr-auto ml-auto" md="8">
                     <h2 className="section-title">How it Works</h2>
                     <h4 className="description">
-                    <span className="italic">Time for Teachers</span> helps teachers track the time they are spending on required tasks and measures it against how much planning time they actually get.
+                    <span className="italic">Time for Teachers</span> helps teachers track the time they are spending on required tasks and contrasts it with how much planning time they actually get.
                     </h4>
                   </Col>
                 </Row>
@@ -73,7 +73,7 @@ function Home() {
                       </div>
                       <h4 className="info-title">Report Generation</h4>
                       <p className="description">
-                        Beautiful charts are automatically generated to show your tracked time, as well as the consolidated averages for your district.
+                        Beautiful charts are automatically generated to show tracked time, as well as the consolidated averages for the school district.
                       </p>
                     </div>
                   </Col>
@@ -84,7 +84,7 @@ function Home() {
                       </div>
                       <h4 className="info-title">Automatic Distribution</h4>
                       <p className="description">
-                        Your district's consolidated reports can be sent to state and local officials, as well as the press. 
+                        The district's consolidated reports can be sent to state and local officials, as well as the press. 
                       </p>
                     </div>
                   </Col>

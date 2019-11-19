@@ -3,7 +3,7 @@ import './forms.css'
 
 export default function Welcome() {
   return (
-    <section className="section auth">
+    <section className="section auth form-page">
       <div className="form-container">
         <h1 className="form-header">Welcome!</h1>
         <p className="directions">You have successfully registered a new account.</p>

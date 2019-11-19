@@ -63,7 +63,7 @@ class ForgotPasswordVerification extends Component {
       return <Redirect to="/dashboard" />;
     }
     return (
-      <section className="section auth">
+      <section className="section auth form-page">
         <div className="container">
           <h1 className="form-header">Set new password</h1>
           <p>

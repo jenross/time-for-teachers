@@ -34,8 +34,12 @@
 }
 
 @media only screen and (min-width: 900px) {
-    .hero-text {
-        margin-right: 100px!important; 
+    .hero-header, .hero-subtext {
+        margin-right: 50px!important; 
+    }
+
+    .hero-header {
+        font-size: 45px; 
     }
     
 }

@@ -5,19 +5,19 @@
 }
 
 .start:hover {
-  background-color: green;
+  background-color: #439da1;
   border-radius: 50px;
   transition: 0.5s;
 }
 
 .stop:hover {
-  background-color: red;
+  background-color: #ea543a;
   border-radius: 50px;
   transition: 0.5s;
 }
 
 .submit:hover {
-  background-color: rgb(71, 114, 231);
+  background-color: #F0B67F;
   border-radius: 50px;
   transition: 0.5s;
 }

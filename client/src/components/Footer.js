@@ -23,11 +23,11 @@ function Footer() {
  
       <footer className="footer footer-default">
         <Container>
-          <nav>
+          <nav className="footer-nav">
             <ul>
               <li>
                 <a
-                  href="#"
+                  href="/about"
                 >
                   About
                 </a>
@@ -49,16 +49,18 @@ function Footer() {
             </ul>
           </nav>
           <div className="copyright" id="copyright">
-            © {new Date().getFullYear()}, &nbsp;
+            © {new Date().getFullYear()},&nbsp;
             <a
               href="https://github.com/jenross"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Jennifer Ross
-            </a> and &nbsp;
+            </a> and&nbsp;
             <a
               href="https://github.com/plake492"
               target="_blank"
+              rel="noopener noreferrer"
             >
                Patrick Lake
             </a>

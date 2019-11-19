@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import API from "./utility/API";
 import CategoryRow from "./CategoryRow";
 import "./Dashboard.css";
-import { Link } from "react-router-dom";
 import moment from "moment";
-// import { Auth } from "aws-amplify";
 import {
   // Button,
   Card,
@@ -193,35 +191,33 @@ export default class Dashboard extends Component {
 
   render() {
     console.log(this.state.allTime);
+
+    const currentUser = localStorage.getItem("CognitoIdentityServiceProvider.333cmqjblblchgm61rg8nankre.LastAuthUser");
+
     return (
       <div className="content header-filter">
         <Navbar className="secondary-nav" expand="lg">
           <Container>
             <NavbarBrand className="secondary-nav-text">
-              <p>Welcome back!</p>
+              <p>Hello, {currentUser}!</p>
             </NavbarBrand>
             <NavbarBrand className="mx-auto secondary-nav-text">
               <CurrentTime />
             </NavbarBrand>
-            <Nav navbar>
-              <NavItem>
-                <NavLink href="/reports" onClick={e => e.preventDefault()}>
-                  <Link to="/reports">
+            
+              <NavbarBrand href="/reports">
                     <img
                       className="chart-icon"
                       src={charts}
                       alt="charts icon"
                     />
                     <p className="secondary-nav-text">Reports</p>
-                  </Link>
-                </NavLink>
-              </NavItem>
-            </Nav>
+              </NavbarBrand>
           </Container>
         </Navbar>
 
-        <Row>
-          <Col lg="3" md="6" sm="12">
+        <Row className="dashboard-container">
+          <Col lg="3" md="12" sm="12">
             <Card className="card-pricing">
               <CardBody>
                 <h6 className="category category-title">
@@ -268,7 +264,6 @@ export default class Dashboard extends Component {
                   <img
                     className="clock-icon"
                     src={clock}
-                    I
                     alt="stopwatch icon"
                   />
                 </div>
@@ -286,7 +281,7 @@ export default class Dashboard extends Component {
               </CardBody>
             </Card>
           </Col>
-          <Col lg="8" md="6" sm="12">
+          <Col lg="8" md="12" sm="12">
             <Card className="card-profile">
               <CardBody>
                 <Table responsive striped>

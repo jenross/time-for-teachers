@@ -1,5 +1,7 @@
 .dashboard-container {
   display: flex;
+  justify-content: center; 
+  align-items: center; 
 }
 
 .dashboard-header {
@@ -20,8 +22,7 @@
 
 .card-pricing {
   background: #f0f3f5 !important;
-  margin-left: 50px;
-  margin-top: 10px;
+ 
 }
 
 .category-title,
@@ -49,6 +50,8 @@
 }
 
 .secondary-nav {
+  display: flex; 
+  justify-content: space-around; 
   margin-top: 200px;
   width: 100%;
   background-color: #ea543a !important;
@@ -59,11 +62,10 @@
 }
 
 .card-profile {
-  margin-left: 50px;
   background-color: #f0f3f5 !important;
-  margin-top: 10px !important;
 }
 
 .table-body {
   border: 1px solid white;
 }
+

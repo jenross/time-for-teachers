@@ -22,7 +22,7 @@ class AuthNavbar extends Component {
   render() {
     // console.log("the props", this.props);
     return (
-      <Navbar className="navbar-absolute navbar-transparent" expand="lg">
+      <Navbar className="navbar-absolute navbar-transparent navbar-bkgrnd" expand="lg">
         <NavbarBrand to="/" tag={Link} id="navbar-brand">
           <img className="logo" src={logo} alt="Time for Teachers logo" />
         </NavbarBrand>

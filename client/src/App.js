@@ -116,7 +116,7 @@ class App extends Component {
               path="/welcome"
               render={props => <Welcome {...props} auth={authProps} />}
             />
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} user={this.state.user} />
             <PrivateRoute exact path="/reports" component={Reports} />
           </Switch>
           <Footer />

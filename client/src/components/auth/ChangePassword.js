@@ -72,7 +72,7 @@ class ChangePassword extends Component {
       return <Redirect to="/dashboard" />;
     }
     return (
-      <section className="section auth">
+      <section className="section auth form-page">
         <div className="form-container">
           <h1 className="form-header">Change Password</h1>
           <FormErrors formerrors={this.state.errors} />
