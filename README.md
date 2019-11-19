@@ -21,7 +21,7 @@ Check out the app [here](https://timeforteachers.us).
 - MongoDB Atlas
 - MongoDB Charts 
 
-## How it Works 
+## 
 
 <img src="./readme-images/description-landing.png" alt="Description on landing page for 'Time for Teachers' app">
 
@@ -40,3 +40,17 @@ The two charts rendered at the top of the page show individual data, measured in
 The two charts rendered at the bottom of the page show that school district's averages, measured in hours. 
 
 <img src="./readme-images/dist-avg-charts.png" alt="District averages on reports">
+
+## Goals and Next Steps 
+
+In the coming months, additional features/functions will be added to the application to make it even easier to use and more effective. Our goal is to help individual teachers and teachers' unions in America consolidate consistent documentation to show how much time it actually takes to do the job. There is a reason why you see cars in school parking lots well after 4pm and teachers entering and exiting the building with bags (sometimes crates) full of paperwork and various odds and ends for activities. They have too much to do and not enough time to do it. 
+
+According to "Phi Delta Kappan", a professional journal for educators, a recent study found that "most teachers have about 45 minutes of planning time per day within their contract hours, with a range from 12 to 80 minutes for elementary teachers and 30 to 96 minutes for secondary teachers". This already limited amount of time can often be swallowed by required meetings and taking care of basic needs (like going to the bathroom). And, since planning time is the only designated time in a teachers' contract for all of the common tasks outlined above, they are forced to do the required tasks on their own time, off the clock. The low pay teachers in the United States receive is justified due to it, on paper, being limited to these stringent and unrealistic contract hours. Often, a teacher's contractual hours add up to less than 40 hours per week, while they are putting in 60-80. 
+
+We hope that this app will help bring more awareness of this very quantifiable issue to the general public, school boards, superintendents, and lawmakers at every level. We hope that the mounting outrage and documentation will assist in collective bargaining efforts that result in better pay, more teaching assistance, and more planning time. 
+
+## Authors
+
+- [Patrick Lake](https://github.com/plake492) 
+- [Jennifer Ross](https://github.com/jenross)
+
