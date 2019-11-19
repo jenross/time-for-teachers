@@ -24,7 +24,7 @@ export default class InputTime extends Component {
     }
     API.saveUserData(this.props.category, {
       [this.props.category]: moment.duration(this.state.userInput).asSeconds(),
-      [this.props.convertedTime]: this.state.userInput,
+      [this.props.convertedtime]: this.state.userInput.replace(/:/gi, "."),
       email: localStorage.getItem("email")
     })
       .then(res => this.setState({ userInput: "" }))
@@ -33,8 +33,7 @@ export default class InputTime extends Component {
 
   render() {
     return (
-      <div className="time-input-container">
-        <td>
+      <React.Fragment>
           <Input
             type="time"
             className="without_ampm"
@@ -42,16 +41,13 @@ export default class InputTime extends Component {
             onChange={this.handleInputChange}
             {...this.props}
           />
-        </td>
-        <td>
           <img
             className="add-btn"
             onClick={this.submitTime}
             src={plus}
             alt="plus icon"
           />
-        </td>
-      </div>
+      </React.Fragment>
     );
   }
 }

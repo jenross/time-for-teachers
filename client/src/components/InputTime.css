@@ -21,6 +21,11 @@
     border: none!important; 
 } */
 
+/* .without_ampm {
+  margin-top: 20px; 
+  max-width: 135px; 
+} */
+
 .without_ampm::-webkit-datetime-edit-ampm-field {
   background-color: black;
   display: none;

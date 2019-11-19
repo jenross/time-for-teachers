@@ -3,33 +3,17 @@ import API from "./utility/API";
 import CategoryRow from "./CategoryRow";
 import "./Dashboard.css";
 import moment from "moment";
-import UpdateModal from "./UpdateModal";
 
-// import { Auth } from "aws-amplify";
 import {
-  // Button,
   Card,
   CardBody,
-  // CardHeader,
   Table,
-  // CardFooter,
-  // CardTitle,
-  // Label,
-  // FormGroup,
-  // Form,
   Input,
-  // InputGroupAddon,
-  // InputGroupText,
-  // InputGroup,
   Container,
-  // Alert,
   Row,
   Col,
   Navbar,
   NavbarBrand,
-  NavLink,
-  NavItem,
-  Nav
 } from "reactstrap";
 import plus from "./images/ic_add_circle_48px.svg";
 // import play from "./images/ic_play_circle_filled_white_48px.svg";
@@ -38,7 +22,6 @@ import plus from "./images/ic_add_circle_48px.svg";
 import plan from "./images/calendar-60.svg";
 import clock from "./images/ic_timer_48px.svg";
 import charts from "./images/ic_insert_chart_48px.svg";
-// import { CostExplorer } from "aws-sdk";
 import CurrentTime from "./CurrentTime";
 
 const allTimeArr = [];
@@ -52,34 +35,34 @@ export default class Dashboard extends Component {
       {
         name: "Grading",
         category: "grading",
-        convertedTime: "gradingConverted"
+        convertedtime: "gradingConverted"
       },
       {
         name: "Lesson Planning",
         category: "lessonPlanning",
-        convertedTime: "lessonPlanningConverted"
+        convertedtime: "lessonPlanningConverted"
       },
       {
         name: "Planning & Organizing Special Events",
         category: "specialEventPlanning",
-        convertedTime: "specialEventPlanningConverted"
+        convertedtime: "specialEventPlanningConverted"
       },
       {
         name: "Communication",
         category: "communications",
-        convertedTime: "communicationsConverted"
+        convertedtime: "communicationsConverted"
       },
       {
         name: "Legal Documentation & Paperwork",
         category: "paperwork",
-        convertedTime: "paperworkConverted"
+        convertedtime: "paperworkConverted"
       },
       {
         name: "Mandatory Trainings & Continuing Education",
         category: "continuingEducation",
-        convertedTime: "continuingEducationConverted"
+        convertedtime: "continuingEducationConverted"
       },
-      { name: "Other", category: "other", convertedTime: "otherConverted" }
+      { name: "Other", category: "other", convertedtime: "otherConverted" }
     ],
     scheduledTime: 0,
     scheduledTimeToday: 0,
@@ -108,7 +91,7 @@ export default class Dashboard extends Component {
   // };
 
   addAllTimeData = data => {
-    console.log(data);
+    // console.log(data);
     data.forEach(x => {
       allTimeArr.push(
         x.grading ||
@@ -123,7 +106,7 @@ export default class Dashboard extends Component {
     this.setState({
       allTime: allTimeArr.map(x => parseInt(x)).reduce((a, b) => a + b, 0)
     });
-    console.log(this.state.allTime);
+    // console.log(this.state.allTime);
   };
 
   componentDidMount() {
@@ -222,7 +205,7 @@ export default class Dashboard extends Component {
   };
 
   render() {
-    console.log(this.state.allTime);
+    // console.log(this.state.allTime);
 
     const currentUser = localStorage.getItem("CognitoIdentityServiceProvider.333cmqjblblchgm61rg8nankre.LastAuthUser");
 
@@ -303,11 +286,11 @@ export default class Dashboard extends Component {
                   <p className="card-description planning-description">
                     You've spent{" "}
                     {moment.utc(this.state.allTime * 1000).format("HH:mm")}{" "}
-                    minutes on required tasks today.
+                    hours/minutes on required tasks today.
                   </p>
                 ) : (
                   <p className="card-description planning-description">
-                    You currently have no time inputed for today
+                    You haven't logged any time today.
                   </p>
                 )}
               </CardBody>
@@ -318,11 +301,12 @@ export default class Dashboard extends Component {
               <CardBody>
                 <Table responsive striped>
                   <tbody className="table-body">
-                    {this.state.categories.map(x => (
+                    {this.state.categories.map((x, index) => (
                       <CategoryRow
+                        key={index}
                         getSum={this.getSum(x.category)}
                         category={x.category}
-                        convertedTime={x.convertedTime}
+                        convertedtime={x.convertedtime}
                         name={x.name}
                         array={x}
                         startClock={this.startClockRunning}

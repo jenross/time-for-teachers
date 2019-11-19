@@ -33,14 +33,14 @@ app.use(cors({
 //   next();
 // });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+
+app.use(express.static("client/build"));
 
 
 app.use(routes);
 
 const MONGODB_URI = process.env.MONGODB_STRING;
+;
 
 mongoose
   .connect(

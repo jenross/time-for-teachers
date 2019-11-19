@@ -1,6 +1,5 @@
 // import React from "react";
 import React, { Component } from "react";
-import { FormGroup } from "reactstrap";
 import Timer from "./Timer";
 import moment from "moment";
 import InputTime from "./InputTime";
@@ -56,7 +55,7 @@ export default class CategoryRow extends Component {
             category={this.props.category}
             array={this.props.array}
             getSum={this.props.getSum}
-            convertedTime={this.props.convertedTime}
+            convertedtime={this.props.convertedtime}
             startClock={this.props.startClock}
             stopClock={this.props.stopClock}
             clockStatus={this.props.clockStatus}
@@ -68,16 +67,16 @@ export default class CategoryRow extends Component {
         </td>
         <td>{this.props.name}</td>
         <td>{moment.utc(this.props.getSum * 1000).format("HH:mm:ss")}</td>
-        <FormGroup>
+        <td>
           <InputTime
             type="text"
             name="userInput"
             id="exampleNumber"
-            placeholder="input your time"
+            placeholder="input time (hh:mm)"
             category={this.props.category}
-            convertedTime={this.props.convertedTime}
+            convertedtime={this.props.convertedtime}
           />
-        </FormGroup>
+        </td>
       </tr>
     );
   }

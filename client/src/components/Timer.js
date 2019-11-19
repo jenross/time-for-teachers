@@ -3,7 +3,6 @@ import API from "./utility/API";
 import plus from "./images/ic_add_circle_48px.svg";
 import play from "./images/ic_play_circle_filled_white_48px.svg";
 import stop from "./images/ic_stop_48px.svg";
-import UpdateModal from "./UpdateModal";
 import "./Timer.css";
 import moment from "moment";
 
@@ -14,7 +13,7 @@ export default class Timer extends Component {
     time: 0,
     clockRunning: false,
     converted: "00:00",
-    convertedTime: ""
+    convertedtime: ""
   };
 
   submitTime = () => {
@@ -78,7 +77,7 @@ export default class Timer extends Component {
     ) {
       API.saveUserData(this.props.category, {
         [this.props.category]: this.state.time,
-        [this.props.convertedTime]: moment
+        [this.props.convertedtime]: moment
           .utc(this.state.time * 1000)
           .format("HH:mm")
           .replace(/:/gi, "."),
