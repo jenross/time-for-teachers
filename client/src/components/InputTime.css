@@ -1,10 +1,36 @@
 .add-btn {
-    width: 35px;
-    height: 35px; 
-    cursor: pointer; 
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #439da1;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+
+.add-btn:active {
+  transform: scale(0.7);
+  border-radius: 50px;
+  transition: 0.3s;
 }
 
 /* .time-input-container {
     margin-top: 20px; 
     border: none!important; 
 } */
+
+.without_ampm::-webkit-datetime-edit-ampm-field {
+  background-color: black;
+  display: none;
+}
+input[type="time"]::-webkit-clear-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  margin: -10px;
+  padding: 100px;
+}

@@ -36,6 +36,8 @@ export default class InputTime extends Component {
       <div className="time-input-container">
         <td>
           <Input
+            type="time"
+            className="without_ampm"
             name="userInput"
             onChange={this.handleInputChange}
             {...this.props}

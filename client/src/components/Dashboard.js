@@ -4,6 +4,8 @@ import CategoryRow from "./CategoryRow";
 import "./Dashboard.css";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import UpdateModal from "./UpdateModal";
+
 // import { Auth } from "aws-amplify";
 import {
   // Button,
@@ -43,6 +45,7 @@ import CurrentTime from "./CurrentTime";
 const allTimeArr = [];
 let todaysDataArr = [];
 let todaysSchduledTimeArr = [];
+let counterCat = "";
 
 export default class Dashboard extends Component {
   state = {
@@ -84,10 +87,11 @@ export default class Dashboard extends Component {
     userData: [],
     userDataToday: [],
     today: moment().format("dddd"),
-    todayDate: moment()
-      .add(5, "hours") //? accounts for the 5 hour differenc in the mongo timestamp//
-      .format("YYYY-MM-DD"),
-    allTime: []
+    todayDate: moment().format("YYYY-MM-DD"),
+    allTime: [],
+    clockRunning: false,
+    counter: 0,
+    counterCategory: ""
   };
 
   //? ==============================================================//
@@ -99,6 +103,10 @@ export default class Dashboard extends Component {
       .map(data => parseInt(data[category]))
       .reduce((a, b) => a + b, 0);
   };
+
+  // triggerRerender = () => {
+  //   console.log("Test rerender");
+  // };
 
   addAllTimeData = data => {
     console.log(data);
@@ -117,36 +125,39 @@ export default class Dashboard extends Component {
       allTime: allTimeArr.map(x => parseInt(x)).reduce((a, b) => a + b, 0)
     });
     console.log(this.state.allTime);
-
-    // console.log(data);
   };
 
   componentDidMount() {
-    //? ======== Checks to see if user has a document associated, Creats one if they don't ======== //
-    API.checkUserData(localStorage.getItem("email"))
+    API.checkUserData(localStorage.getItem("email")) //? ======== Checks to see if user has a document associated, Creats one if they don't ======== //
+
       .then(res => {
         if (res.data.length === 0) {
           API.createDocument(localStorage.getItem("email"))
             .then(res)
             .catch(err => console.log(err));
         }
-        //? =============================================================================================//
-        //? ======== get acumulated time data for the user submit function ======== //
 
-        todaysDataArr = [];
+        todaysDataArr = []; //? ======== get acumulated time data for the user submit function ======== //
         res.data[0].time.forEach(x => {
-          if (x.date.slice(0, 10) === this.state.todayDate) {
+          if (
+            moment(x.date)
+              .subtract(5, "hours")
+              .format("YYYY-MM-DD") === this.state.todayDate
+          ) {
             todaysDataArr.push(x);
           }
         });
         this.setState({ userDataToday: todaysDataArr });
-        // console.log("USER DATA TODAY", this.state.userDataToday);
-        // console.log(this.state.userDataToday);
-        //! CHANGE THIS LATER //
+
+        //! CHANGE THIS LATER // So that if a submitted time already exists, prompt the user if they wish to update ir keep the same
         todaysSchduledTimeArr = [];
         res.data[0].comparisonTime.forEach(x => {
-          if (x.date.slice(0, 10) === this.state.todayDate) {
-            console.log("What is this?", x.scheduledTime);
+          if (
+            moment(x.date)
+              .subtract(5, "hours")
+              .format("YYYY-MM-DD") === this.state.todayDate
+          ) {
+            // console.log("What is this?", x.scheduledTime);
             todaysSchduledTimeArr.push(x.scheduledTime);
           }
         });
@@ -155,16 +166,12 @@ export default class Dashboard extends Component {
 
         this.setState({ userDataToday: todaysDataArr });
 
-        //!========//
+        //?======== Sums only todays data ///////
         this.addAllTimeData(this.state.userDataToday);
-        // console.log(this.state.allTime);
-        //!========//
 
         this.setState({
           userData: this.state.userDataToday
         });
-
-        // console.log(res.data[0].comparisonTime);
       })
       .catch(err => console.log(err));
   }
@@ -191,8 +198,31 @@ export default class Dashboard extends Component {
     }
   };
 
+  startClockRunning = x => {
+    console.log("++++++++ ITS RUNNING +++++++++++");
+    counterCat = x;
+    return this.setState({
+      counterCategory: counterCat,
+      clockRunning: !this.state.clockRunning
+    });
+  };
+
+  stopClockRunning = x => {
+    console.log("++++++++ ITS NOT RUNNING +++++++++++", x);
+    // this.setState({});
+    this.setState({
+      clockRunning: !this.state.clockRunning,
+      counter: this.state.counter
+    });
+    console.log("Counter", this.state.counterCategory);
+    console.log(counterCat);
+  };
+
+  updateCounter = () => {
+    this.setState({ counter: this.state.counter + 1 });
+  };
+
   render() {
-    console.log(this.state.allTime);
     return (
       <div className="content header-filter">
         <Navbar className="secondary-nav" expand="lg">
@@ -298,6 +328,14 @@ export default class Dashboard extends Component {
                         convertedTime={x.convertedTime}
                         name={x.name}
                         array={x}
+                        startClock={this.startClockRunning}
+                        stopClock={this.stopClockRunning}
+                        clockStatus={this.state.clockRunning}
+                        // triggerRerender={this.triggerRerender}
+                        counter={this.state.counter}
+                        updateCounter={this.updateCounter}
+                        counterCategory={this.state.counterCategory}
+                        rerender={this.butt}
                       />
                     ))}
                   </tbody>

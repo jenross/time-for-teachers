@@ -17,7 +17,25 @@
 }
 
 .submit:hover {
-  background-color: rgb(71, 114, 231);
+  background-color: #439da1;
   border-radius: 50px;
   transition: 0.5s;
+}
+
+.start:active {
+  transform: scale(0.7);
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.stop:active {
+  transform: scale(0.7);
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.submit:active {
+  transform: scale(0.7);
+  border-radius: 50px;
+  transition: 0.3s;
 }
