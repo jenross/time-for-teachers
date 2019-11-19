@@ -40,22 +40,33 @@ export default class Timer extends Component {
     counter++;
     this.setState({ time: counter });
     this.timeConverter(counter);
+    this.props.updateCounter();
   };
 
   startClock = () => {
-    if (!this.state.clockRunning) {
-      this.setState({
-        time: counter
-        // convertedTime: moment.utc(counter * 1000).format("HH:mm")
-      });
-      let intervalId = setInterval(this.count, 1000);
-      this.setState({ clockRunning: true, intervalId: intervalId });
+    if (
+      !counter ||
+      (counter === this.props.counter &&
+        this.props.category === this.props.counterCategory)
+    ) {
+      if (!this.props.clockStatus) {
+        this.props.startClock(this.props.category);
+        let intervalId = setInterval(this.count, 10);
+        this.setState({ clockRunning: true, intervalId: intervalId });
+        this.setState({
+          time: counter
+        });
+      }
+      console.log("THE COUNTER CATEGORY", this.props.counterCategory);
     }
   };
 
   stopClock = () => {
-    clearInterval(this.state.intervalId);
-    this.setState({ clockRunning: false });
+    if (this.props.category === this.props.counterCategory) {
+      clearInterval(this.state.intervalId);
+      this.props.stopClock(this.props.category);
+      this.setState({ clockRunning: false });
+    }
   };
 
   submitTime = event => {
@@ -73,7 +84,9 @@ export default class Timer extends Component {
           this.setState({
             time: 0,
             converted: "00:00"
-          })
+          }),
+          // this.props.rerender(),
+          (counter = 0)
         )
         .catch(err => console.log(err));
     }
@@ -106,6 +119,7 @@ export default class Timer extends Component {
           />
         </div>
       </div>
+      
     );
   }
 }

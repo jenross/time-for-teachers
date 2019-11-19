@@ -1,7 +1,19 @@
 .add-btn {
-    width: 35px;
-    height: 35px; 
-    cursor: pointer; 
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #439da1;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+
+.add-btn:active {
+  transform: scale(0.7);
+  border-radius: 50px;
+  transition: 0.3s;
 }
 
 /* .time-input-container {
